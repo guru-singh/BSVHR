@@ -32,7 +32,7 @@ function populateDataTable(data) {
                 item.regionName,
                 item.bedNo,
                 item.ICUbedNo,
-                `<a href="/hospitals/${item.hospitalId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteHospital(${item.hospitalId},"${item.hospitalName}");return false;'>Delete</a>`
+                `<a href="/hospitals-edit/${item.hospitalId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteHospital(${item.hospitalId},"${item.hospitalName}");return false;'>Delete</a>`
             ]);
             i++;
         });
@@ -53,8 +53,14 @@ function getHospitaDetails() {
     };
 
     axios
-        .get('/hospitals/details/:'+hospitalId).then((response) => {
-           
+        .get('/hospitals-details/'+hospitalId).then((response) => {
+           console.log(response.data)
+           let hospitalData = response.data[0];
+           console.log(hospitalData.hospitalName);
+           $('#txtHospitalName').val(hospitalData.hospitalName);
+           $('#txtRegionName').val(hospitalData.regionName);
+           $("#chkIsDisable").prop("checked", hospitalData.isDisabled);
+
 
         }).catch((err) => {
             console.log(err);

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Add Employee</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body> 
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6"><strong>Add Employee</strong></div>
+      <div class="col-lg-6 text-right"><a href="list.html" class="btn btn-success">Back</a></div>
+    </div>
+    <form>
+      <div class="form-group">
+        <label for="combzone">Select Zone</label>
+        <select class="form-control" id="combzone">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="combstate">Select State</label>
+        <select class="form-control" id="combstate">
+          <option>Up</option>
+          <option>Maharashtra</option>
+          <option>Bengal</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="combcity">Select City</label>
+        <select class="form-control" id="combcity">
+          <option>Mumbai</option>
+          <option>Chennai</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="hqcodetext">HQ Code</label>
+        <input type="text" class="form-control" id="hqcodetext">
+      </div>
+
+      <div class="form-group">
+        <label for="empnumbertext">Emp Number</label>
+        <input type="number" class="form-control" id="empnumbertext">
+      </div>
+
+      <div class="form-group">
+        <label for="firstnametext">First Name</label>
+        <input type="text" class="form-control" id="firstnametext">
+      </div>
+
+      <div class="form-group">
+        <label for="lastnametext">Last Name</label>
+        <input type="text" class="form-control" id="lastnametext">
+      </div>
+
+      <div class="form-group">
+        <label for="designationcomb">Select Designation</label>
+        <select class="form-control" id="designationcomb">
+          <option>Manager Department</option>
+          <option>Sales Department</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="hqname">HQ Name</label>
+        <select class="form-control" id="hqname">
+          <option>Manish</option>
+          <option>Suresh</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="regiontext">Region</label>
+        <input type="text" class="form-control" id="regiontext">
+      </div>
+
+      <div class="form-group">
+        <label for="dob">Date</label>
+        <input type="date" class="form-control" id="dob">
+      </div>
+
+      <div class="form-group">
+        <label for="mobtext">Mobile Number</label>
+        <input type="text" class="form-control" id="mobtext">
+      </div>
+
+      <div class="form-group">
+        <label for="emailtext">Email Address</label>
+        <input type="email" class="form-control" id="emailtext">
+      </div>
+
+      <div class="form-group">
+        <label for="pwd">Password</label>
+        <input type="password" class="form-control" id="pwd">
+      </div>
+
+      <div class="checkbox">
+        <label><input type="checkbox" id="isenabled">Disabled</label>
+      </div>
+
+      <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea class="form-control" rows="5" id="comment"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-default">Submit</button>
+
+    </form>
+  </div>
+
+</body>
+</html>

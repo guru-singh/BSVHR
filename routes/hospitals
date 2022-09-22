@@ -4,13 +4,15 @@ const hospitalController = require('../controllers/hospitalController')
 
 router.use((req, res, next) => {
    // console.clear();
-    console.log('Time: ', Date.now())
+  //  console.log('Time: ', Date.now())
     next()
   })
 
 router.get('/hospitals', hospitalController.listHospitals);
 
-router.get('/hospitals/:number', hospitalController.getHospitalById);
+router.get('/hospitals-edit/:id', hospitalController.getHospitalDetailsPage);
+router.get('/hospitals-details/:hospitalId', hospitalController.getHospitalDetailsById);
+
 
 // router.get('/hospitals/:hospitalId(\d+)', function(req, res, next) {
 //     console.log('')
@@ -23,7 +25,8 @@ router.get('/hospitals/:number', hospitalController.getHospitalById);
 // });
 
 
-router.get('/hospitals/list', hospitalController.list HospitalsList);
+router.get('/hospitals/list', hospitalController.getHospitalList);
+
 router.post('/hospitals/delete', hospitalController.deleteHospitals);
 
 //router.post('/hospital/api', listHospitals.postApi);

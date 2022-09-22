@@ -9,20 +9,24 @@ exports.listHospitals = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/hospitals/list.html`);
 };
 
-exports.getHospitalById = (req, res, next) => {
-    console.log(req.params)
+exports.getHospitalDetailsPage = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/hospitals/detail.html`);
 };
 
 
 
-exports.listHospitalsList = (req, res, next) => {
-    listHospitalsList(req.body).then((result) =>{
+exports.getHospitalList = (req, res, next) => {
+    listHospitalsList(req.body).then((result) => {
         res.status(_STATUSCODE).json(result);
     });
 };
 
-//
+exports.getHospitalDetailsById = (req, res, next) => {
+    getHospitalDetailsById(req.params).then((result) => {
+        res.status(_STATUSCODE).json(result);
+    });
+};
+
 
 exports.addHospitals = () => {
 
@@ -51,9 +55,9 @@ listHospitalsList = (objParam) => {
                 request
                     .execute("USP_BSVHR_LIST_HOSPITAL")
                     .then(function (resp) {
-                      // console.log(resp)
-                      resolve(resp.recordset);
-                      dbConn.close();
+                        // console.log(resp)
+                        resolve(resp.recordset);
+                        dbConn.close();
                     })
                     .catch(function (err) {
                         //console.log(err);
@@ -68,7 +72,7 @@ listHospitalsList = (objParam) => {
 
 
 deleteHospital = (objParam) => {
-   // console.log('I am Here', objParam);
+    // console.log('I am Here', objParam);
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -79,9 +83,9 @@ deleteHospital = (objParam) => {
                     .input("hospitalId", sql.Int, objParam.hospitalId)
                     .execute("USP_BSVHR_DELETE_HOSPITAL")
                     .then(function (resp) {
-                          let json = {success: true, msg: 'Hospital deleted successfully'};
-                          resolve(json);
-                          dbConn.close();
+                        let json = { success: true, msg: 'Hospital deleted successfully' };
+                        resolve(json);
+                        dbConn.close();
                     })
                     .catch(function (err) {
                         //console.log(err);
@@ -96,3 +100,28 @@ deleteHospital = (objParam) => {
 
 
 
+getHospitalDetailsById = (objParam) => {
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("hospitalId", sql.Int, objParam.hospitalId)
+                    .execute("USP_BSVHR_GET_HOSPITAL_DETAILS_BY_ID")
+                    .then(function (resp) {
+                        //console.log(resp)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        //console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                //console.log(err);
+            });
+    });
+};

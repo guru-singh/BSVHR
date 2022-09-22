@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Assign New Hospital</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <form>
+    <div class="container">
+      <div class="row">
+          <div class="col-lg-6">
+              <strong>Assign New Hospital</strong>        
+          </div>
+          <div class="col-lg-6 text-right" style="display: flex; justify-content: space-between;">
+            <strong>Ajay</strong>
+            <div class="form-group">
+              <label for="combzone">Select Zone</label>
+              <select class="form-control" id="combzone">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </div>
+          </div>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>
+              <input type="checkbox" class="checkbox" value="1" id="ckbCheckAll">
+            </th>
+            <th>Hosptal Name</th>
+            <th>Region</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="assign-hosp-list">
+          <tr>
+            <th><input type="checkbox" value="98" class="selectedchk"></th>
+            <td>John</td>
+            <td>Doe</td>
+            <td><a href="#">Emp Remove</a></td>
+          </tr>
+          <tr>
+            <th><input type="checkbox" value="99" class="selectedchk"></th>
+            <td>Mary</td>
+            <td>Moe</td>
+            <td><a href="#">Emp Remove</a></td>
+          </tr>
+          <tr>
+            <th><input type="checkbox" value="100" class="selectedchk"></th>
+            <td>July</td>
+            <td>Dooley</td>
+            <td><a href="#">Emp Remove</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="submit" class="btn btn-success" id="isApprove" disabled="">Approve</button>
+    </div>
+  </form>
+    
+  <script>
+
+  function isEnableApproveBtn() {
+    const isApproveBtn = $('#isApprove');
+    if ($('.selectedchk:checked').length > 0) {
+      isApproveBtn.removeAttr('disabled');
+    } else {
+      isApproveBtn.attr("disabled", true);
+    }
+  }
+
+    $('#ckbCheckAll').on('click', function () {
+        if (this.checked) {
+          $('.selectedchk').each(function () {
+            this.checked = true;
+          });
+        } else {
+          $('.selectedchk').each(function () {
+            this.checked = false;
+          });
+        }
+        isEnableApproveBtn();
+      });
+
+      $('#assign-hosp-list').on('click', '.selectedchk', function () {
+    //alert('Ram');
+    console.log('checked');
+    if ($('.selectedchk:checked').length == $('.selectedchk').length) {
+        $('#ckbCheckAll').prop('checked', true);
+    } else {
+        $('#ckbCheckAll').prop('checked', false);
+    }
+    isEnableApproveBtn();
+});
+
+  </script>
+
+</body>
+</html>
