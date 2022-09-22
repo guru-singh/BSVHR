@@ -1,0 +1,55 @@
+<html>
+<head>
+    <title>List Hospital</title>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/axios.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+
+
+    
+</head>
+<h1> List Hospitals</h1>
+
+
+
+
+<table id="hospitalList" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Sr No.</th>
+            <th>Hospital Name</th>
+            <th>Region</th>
+            <th>No of Bed</th>
+            <th>No of ICU Bed</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+</table>
+
+
+   <!--Data Table-->
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
+   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+<!--Data Table-->
+
+<script src="../../js/hospitals.js"></script>
+
+<script>
+    $(function() {
+       // console.log( "ready!" );
+        getHospitalList();
+
+        $('#hospitalList').DataTable({
+                "iDisplayLength": 100,
+                "paging": false,
+                "language": {
+                    emptyTable: 'Loading data', // 
+                    loadingRecords: "Please wait .. ", // default Loading...
+                    zeroRecords: "No matching records found"
+                }
+            });
+    });
+    
+    </script>
