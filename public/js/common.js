@@ -1,7 +1,15 @@
 const _SUCCESSFUL_STATUS_CODE = 200;
 const _INVAID_SESSION = 202
 const _FAILURE_STATUS_CODE = 201
-const _POSTLOGINURL = '/dashboard'
+
+
+const _URL = {
+        _hospitalListing: '/hospitals',
+        _POSTLOGINURL:  '/dashboard',
+        _HOSPITAL_UPDATE:'/hospitals-update/',
+        _HOSPITAL_ADD:'/hospitals-add/',
+
+    }
 
 
 function checkIfValidStatus(statusCode) {
@@ -18,5 +26,14 @@ function checkIfValidStatus(statusCode) {
         default:
             break;
     }
+
+}
+
+function redirect(url) {
+    document.location.href = url;
+}
+
+function isEditPage(){
+    return (location.pathname.indexOf('add') < 0)
 
 }

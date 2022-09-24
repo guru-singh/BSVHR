@@ -8,27 +8,22 @@ router.use((req, res, next) => {
     next()
   })
 
+  //listing
 router.get('/hospitals', hospitalController.listHospitals);
-
-router.get('/hospitals-edit/:id', hospitalController.getHospitalDetailsPage);
-router.get('/hospitals-details/:hospitalId', hospitalController.getHospitalDetailsById);
-
-
-// router.get('/hospitals/:hospitalId(\d+)', function(req, res, next) {
-//     console.log('')
-//     res.send('respond with a resource');
-//   });
-
-
-// router.get('/hospitals/:number', function(req, res, next) {
-//     res.send(JSON.stringify(req.params));
-// });
-
-
 router.get('/hospitals/list', hospitalController.getHospitalList);
 
+// update
+router.get('/hospitals-edit/:id', hospitalController.getHospitalDetailsPage);
+router.get('/hospitals-details/:hospitalId', hospitalController.getHospitalDetailsById);
+router.post('/hospitals-update/:hospitalId', hospitalController.updateHospitals);
+
+
+// DELETE
 router.post('/hospitals/delete', hospitalController.deleteHospitals);
 
-//router.post('/hospital/api', listHospitals.postApi);
+
+//ADD
+router.get('/hospitals-add/', hospitalController.getHospitalDetailsPage);
+router.post('/hospitals-add/', hospitalController.addNewHospital);
 
 module.exports = router;

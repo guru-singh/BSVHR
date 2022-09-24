@@ -12,7 +12,7 @@ function letMeLogin() {
             switch (checkIfValidStatus(response.status)) {
                 case 1:
                     localStorage.setItem("BSV_HR_Admin_Data", JSON.stringify(response.data.userDetiails));
-                    (document.location.href = _POSTLOGINURL)
+                    (document.location.href = _URL._POSTLOGINURL);
                     break;
                 case 2:
                     $('#lblmsg').text(response.data.msg)

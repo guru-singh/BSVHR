@@ -3,7 +3,7 @@ function getHospitalList() {
     let param = {
         method: 'getHospitalList'
     };
-
+ 
     axios
         .get("/hospitals/list", param).then((response) => {
 
@@ -41,7 +41,9 @@ function populateDataTable(data) {
 
 
 function getHospitaDetails() {
-    //getQueryStringValue('xxx')
+    if (!isEditPage() ) {
+        return ;
+    }
     let urlArr = window.location.href.split('/'),
         hospitalId = urlArr[urlArr.length - 1];
 
@@ -95,6 +97,37 @@ function getQueryStringValue(key) {
     let urlSearchParams = new URLSearchParams(window.location.search);
     console.log(urlSearchParams)
     return urlSearchParams.get(key);
+
+
+}
+
+function validateMe() {
+    let urlArr = window.location.href.split('/'),
+    hospitalId = urlArr[urlArr.length - 1];
+
+console.log(hospitalId);
+    let param = {
+        hospitalName : $('#txtHospitalName').val(),
+        hospitalregion : $('#txtRegionName').val(),
+        isDisabled : $('#chkIsDisable').val()
+    },
+    URL =  isEditPage()? _URL._HOSPITAL_UPDATE+hospitalId: _URL._HOSPITAL_ADD
+    
+    axios
+    .post(URL, param).then((response) => {
+        console.log(response.data[0])
+        let res = response.data[0];
+        if (res.sucess === 'true') {
+             redirect(_URL._hospitalListing);
+        } else {
+            $('#lblMsg').text(res.msg);
+        }
+       
+
+    }).catch((err) => {
+        console.log(err);
+    });
+    
 
 
 }

@@ -3,7 +3,9 @@
 <script src="../../js/axios.min.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
 
+<div id='lblMsg'>
 
+</div>
 <form id="frm1" onsubmit="validateMe();return false;">
     Hospital name: <input type="text" id="txtHospitalName" placeholder="Hospital Name" /><br><br>
     region name: <input type="text" id="txtRegionName" placeholder="Hospital region Name" /><br><br>
@@ -16,6 +18,7 @@
 <script>
     $(function () {
         // console.log( "ready!" );
+
         getHospitaDetails();
     });
 </script>
