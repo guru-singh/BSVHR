@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Add Employee</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="../../js/common.js"></script>
+  <script src="../../js/axios.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body> 
 
+</head>
+
+<body>
+  <div id='lblMsg'> </div>
   <div class="container">
     <div class="row">
       <div class="col-lg-6"><strong>Add Employee</strong></div>
@@ -18,99 +23,98 @@
     <form>
       <div class="form-group">
         <label for="combzone">Select Zone</label>
-        <select class="form-control" id="combzone">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
+        <select class="form-control" id="cmbZone">
+          <option value="0">----Select----</option>
+          <option value="2">East</option>
+          <option value="3">North</option>
+          <option value="4">South</option>
+          <option value="5">West</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="combstate">Select State</label>
-        <select class="form-control" id="combstate">
+        <input type="hidden" class="form-control" id="txtStateId">
+        <select class="form-control" id="cmbState">
           <option>Up</option>
           <option>Maharashtra</option>
           <option>Bengal</option>
         </select>
       </div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="combcity">Select City</label>
         <select class="form-control" id="combcity">
           <option>Mumbai</option>
           <option>Chennai</option>
         </select>
-      </div>
+      </div> -->
 
       <div class="form-group">
-        <label for="hqcodetext">HQ Code</label>
-        <input type="text" class="form-control" id="hqcodetext">
+        <label for="txtHqCodelbl">HQ Code</label>
+        <input type="text" class="form-control" id="txtHqCode">
       </div>
 
       <div class="form-group">
         <label for="empnumbertext">Emp Number</label>
-        <input type="number" class="form-control" id="empnumbertext">
+        <input type="number" class="form-control" id="txtEmpNumber">
       </div>
 
       <div class="form-group">
         <label for="firstnametext">First Name</label>
-        <input type="text" class="form-control" id="firstnametext">
+        <input type="text" class="form-control" id="txtFirstName">
       </div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="lastnametext">Last Name</label>
         <input type="text" class="form-control" id="lastnametext">
-      </div>
+      </div> -->
 
       <div class="form-group">
         <label for="designationcomb">Select Designation</label>
-        <select class="form-control" id="designationcomb">
-          <option>Manager Department</option>
-          <option>Sales Department</option>
+        <input type="hidden" class="form-control" id="txtDesignation">
+        <select class="form-control" id="cmbDesignation">
+         
         </select>
       </div>
 
       <div class="form-group">
         <label for="hqname">HQ Name</label>
-        <select class="form-control" id="hqname">
-          <option>Manish</option>
-          <option>Suresh</option>
-        </select>
+        <input type="text" class="form-control" id="txtHqName">
       </div>
 
       <div class="form-group">
         <label for="regiontext">Region</label>
-        <input type="text" class="form-control" id="regiontext">
+        <input type="text" class="form-control" id="txtRegion">
       </div>
 
       <div class="form-group">
         <label for="dob">Date</label>
-        <input type="date" class="form-control" id="dob">
+        <input type="text" class="form-control" id="txtDOJ">
       </div>
 
       <div class="form-group">
         <label for="mobtext">Mobile Number</label>
-        <input type="text" class="form-control" id="mobtext">
+        <input type="text" class="form-control" id="txtMobile">
       </div>
 
       <div class="form-group">
         <label for="emailtext">Email Address</label>
-        <input type="email" class="form-control" id="emailtext">
+        <input type="email" class="form-control" id="txtEmail">
       </div>
 
       <div class="form-group">
         <label for="pwd">Password</label>
-        <input type="password" class="form-control" id="pwd">
+        <input type="password" class="form-control" id="txtPassword">
       </div>
 
       <div class="checkbox">
-        <label><input type="checkbox" id="isenabled">Disabled</label>
+        <label><input type="checkbox" id="chkDisable">Disabled</label>
       </div>
 
       <div class="form-group">
         <label for="comment">Comment</label>
-        <textarea class="form-control" rows="5" id="comment"></textarea>
+        <textarea class="form-control" rows="5" id="txtComment"></textarea>
       </div>
 
       <button type="submit" class="btn btn-default">Submit</button>
@@ -118,5 +122,14 @@
     </form>
   </div>
 
+  <script src="../../js/employees.js"></script>
+  <script>
+    $(function () {
+      // console.log( "ready!" );
+
+      getEmployeeDetails();
+    });
+  </script>
 </body>
+
 </html>

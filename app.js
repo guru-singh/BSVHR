@@ -26,15 +26,15 @@ app.use(cookieParser());
 
  const hospitalsRoutes = require('./routes/hospitals');
  //const managerRoutes = require('./routes/manager');
- //const employeesRoutes = require('./routes/employees');
+ const employeesRoutes = require('./routes/employee');
  const adminRoutes = require('./routes/admin');
 
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(hospitalsRoutes);
 app.use(adminRoutes);
+app.use(employeesRoutes);
 
-//app.use(employeesRoutes);
 //app.use(managerRoutes);
 
 

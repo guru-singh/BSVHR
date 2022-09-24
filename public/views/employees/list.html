@@ -5,8 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="../../js/common.js"></script>
+  <script src="../../js/axios.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
 </head>
 <body> 
 
@@ -17,114 +22,57 @@
     </div>  
 
     <div class="table-responsive">
-      <table class="table table-bordered">
+      <table id="employeesList" class="table">
         <thead>
           <tr>
+            <th>Sr. No.</th>
+            <th>Emp Number</th>
+            <th>Designation</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
             <th>Zone</th>
             <th>State</th>
-            <th>City</th>
             <th>HQ Code</th>
-            <th>Emp Number</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Designation</th>
             <th>HQ Name</th>
             <th>Region</th>
-            <th>Dob</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Is Enabled</th>
+            <th>DOJ</th>
             <th>Commnents</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Zone</td>
-            <td>State</td>
-            <td>City</td>
-            <td>HQ Code</td>
-            <td>Emp Number</td>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Designation</td>
-            <td>HQ Name</td>
-            <td>Region</td>
-            <td>Dob</td>
-            <td>Mobile</td>
-            <td>Email</td>
-            <td>Password</td>
-            <td>Is Enabled</td>
-            <td>Commnents</td>
-            <td>
-              <a href="add.html">Detail</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Zone</td>
-            <td>State</td>
-            <td>City</td>
-            <td>HQ Code</td>
-            <td>Emp Number</td>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Designation</td>
-            <td>HQ Name</td>
-            <td>Region</td>
-            <td>Dob</td>
-            <td>Mobile</td>
-            <td>Email</td>
-            <td>Password</td>
-            <td>Is Enabled</td>
-            <td>Commnents</td>
-            <td><a href="add.html">Detail</a></td>
-          </tr>
-          <tr>
-            <td>Zone</td>
-            <td>State</td>
-            <td>City</td>
-            <td>HQ Code</td>
-            <td>Emp Number</td>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Designation</td>
-            <td>HQ Name</td>
-            <td>Region</td>
-            <td>Dob</td>
-            <td>Mobile</td>
-            <td>Email</td>
-            <td>Password</td>
-            <td>Is Enabled</td>
-            <td>Commnents</td>
-            <td><a href="add.html">Detail</a></td>
-          </tr>
-          <tr>
-            <td>Zone</td>
-            <td>State</td>
-            <td>City</td>
-            <td>HQ Code</td>
-            <td>Emp Number</td>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Designation</td>
-            <td>HQ Name</td>
-            <td>Region</td>
-            <td>Dob</td>
-            <td>Mobile</td>
-            <td>Email</td>
-            <td>Password</td>
-            <td>Is Enabled</td>
-            <td>Commnents</td>
-            <td><a href="add.html">Detail</a></td>
-          </tr>
+         
         </tbody>
       </table>
     </div>
     
 
   </div>
-  
+   <!--Data Table-->
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
+   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+<!--Data Table-->
+  <script src="../../js/employees.js"></script>
 
+  <script>
+      $(function() {
+         // console.log( "ready!" );
+          getEmployeeList();
+  
+          $('#employeesList').DataTable({
+                  "iDisplayLength": 100,
+                  "pageLength": 50,
+                  "paging": true,
+                  "language": {
+                      emptyTable: 'Loading data', // 
+                      loadingRecords: "Please wait .. ", // default Loading...
+                      zeroRecords: "No matching records found"
+                  }
+              });
+      });
+      
+      </script>
 </body>
 </html>
