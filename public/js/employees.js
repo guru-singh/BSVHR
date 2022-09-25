@@ -39,7 +39,7 @@ function populateDataTable(data) {
                 item.hqname,
                 item.regionName,
                 item.doj,
-                item.comments,
+                item.comments.split('/r/n')[0],
                 `<a href='${_URL._EMPLOYEE_EDIT}${item.empId}'>Edit</a> | <a href='javascript:void(0)' onclick='DeleteEmployee(${item.empId},"${item.firstName}");return false;'>Delete</a>`
             ]);
             i++;
@@ -91,12 +91,12 @@ function getEmployeeDetails() {
 
     axios
         .get(`${_URL._EMPLOYEE_DETAILS}${empId}`).then((response) => {
-            console.log(response.data)
+           // console.log(response.data)
             let empDetails = response.data[0];
             //   combzone
             //   cmbState
             //   cmbDesignation
-            console.log(empDetails)
+           // console.log(empDetails)
             $('#txtHqCode').val(empDetails.HoCode);
             $('#txtEmpNumber').val(empDetails.EmpNumber);
             $('#txtFirstName').val(empDetails.firstName);
@@ -133,4 +133,46 @@ function cmbValues() {
     $("#cmbState").val($('#txtStateId').val());
 
     $("#cmbDesignation").val($('#txtDesignation').val())
+}
+
+
+function validateMe()
+{
+    let urlArr = window.location.href.split('/'),
+    empId = urlArr[urlArr.length - 1];
+
+
+
+    let param = {
+        cmbZone: $('#cmbZone').val(),
+        cmbState: $('#cmbState').val(),
+        txtHqCode: $('#txtHqCode').val(),
+        txtEmpNumber: $('#txtEmpNumber').val(),
+        txtFirstName: $('#txtFirstName').val(),
+        cmbDesignation: $('#cmbDesignation').val(),
+        txtHqName: $('#txtHqName').val(),
+        txtRegion: $('#txtRegion').val(),
+        txtDOJ: $('#txtDOJ').val(),
+        txtMobile: $('#txtMobile').val(),
+        txtEmail: $('#txtEmail').val(),
+        txtPassword: $('#txtPassword').val(),
+        txtNewComment: $('#txtNewComment').val(),
+        chkDisable: ($('#chkDisable').val() === 'on')
+    },
+    URL =  isEditPage()? _URL._EMPLOYEE_UPDATE+empId: _URL._HOSPITAL_ADD;
+
+    
+    axios
+    .post(URL, param).then((response) => {
+        console.log(response.data[0])
+        let res = response.data[0];
+        if (res.sucess === 'true') {
+             redirect(_URL._EMPLOYEE);
+        } else {
+            $('#lblMsg').text(res.msg);
+        }
+    }).catch((err) => {
+        console.log(err);
+    });
+    
 }

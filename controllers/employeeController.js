@@ -131,7 +131,61 @@ getEmployeeDetailsById = (objParam) => {
     });
 };
 
-//getHospitalDetailsPage
+
+exports.updateEmployee = (req, res, next) => {
+   // console.log('inside update employee');
+    let params = Object.assign(req.params, req.body);
+    updateEmployee(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
+
+function updateEmployee( objParam ) {
+    console.log('--------------------------------')
+    console.log(objParam.empId)
+    console.log('--------------------------------')
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("EmpID", sql.Int, objParam.empId)
+                    .input("firstName", sql.NVarChar, objParam.txtFirstName)
+                    .input("MobileNumber", sql.NVarChar, objParam.txtMobile)
+                    .input("Password", sql.NVarChar, (objParam.txtPassword))
+                    .input("Designation", sql.NVarChar, '')
+                    .input("DesignationID", sql.Int, objParam.cmbDesignation)
+                    .input("EmpNumber", sql.NVarChar, objParam.txtEmpNumber)
+                    .input("HoCode", sql.NVarChar, objParam.txtHqCode)
+                    .input("ZoneID", sql.Int, objParam.cmbZone)
+                    .input("StateID", sql.Int, (objParam.cmbState))
+                    .input("HQName", sql.NVarChar, objParam.txtHqName)
+                    .input("RegionName", sql.NVarChar, objParam.txtRegion)
+                    .input("DOJ", sql.NVarChar, objParam.txtDOJ)
+                    .input("isDisabled", sql.Bit, objParam.chkDisable)
+                    .input("comments", sql.NVarChar, (objParam.txtNewComment))
+                    
+                    .execute("USP_BSVHR_UPDATE_EMPLOYEE_DETAILS_BY_ID")
+                    .then(function (resp) {
+                        console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
+
+
+//
 /************* EDIT MODULE *************/
 /************* MASTER MODULE *************/
 exports.getMasterData = (req, res, next) => {

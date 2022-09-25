@@ -20,7 +20,7 @@
       <div class="col-lg-6"><strong>Add Employee</strong></div>
       <div class="col-lg-6 text-right"><a href="list.html" class="btn btn-success">Back</a></div>
     </div>
-    <form>
+    <form onsubmit="validateMe();return false;">
       <div class="form-group">
         <label for="combzone">Select Zone</label>
         <select class="form-control" id="cmbZone">
@@ -100,7 +100,7 @@
 
       <div class="form-group">
         <label for="emailtext">Email Address</label>
-        <input type="email" class="form-control" id="txtEmail">
+        <input type="email" readonly class="form-control" id="txtEmail">
       </div>
 
       <div class="form-group">
@@ -111,10 +111,13 @@
       <div class="checkbox">
         <label><input type="checkbox" id="chkDisable">Disabled</label>
       </div>
-
+      <div class="form-group">
+        <label for="comment">Old Comment</label>
+        <textarea class="form-control" readonly rows="5" id="txtComment"></textarea>
+      </div>
       <div class="form-group">
         <label for="comment">Comment</label>
-        <textarea class="form-control" rows="5" id="txtComment"></textarea>
+        <textarea class="form-control" rows="5" id="txtNewComment"></textarea>
       </div>
 
       <button type="submit" class="btn btn-default">Submit</button>
