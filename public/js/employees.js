@@ -80,8 +80,11 @@ function getMasterData() {
         });
 }
 function getEmployeeDetails() {
-    getMasterData()
+    getMasterData();
+    
     if (!isEditPage()) {
+        $('#txtEmail').prop('readonly', false);
+        $('#dvOldComments').hide();
         return;
     }
     let urlArr = window.location.href.split('/'),
@@ -159,8 +162,8 @@ function validateMe()
         txtNewComment: $('#txtNewComment').val(),
         chkDisable: ($('#chkDisable').val() === 'on')
     },
-    URL =  isEditPage()? _URL._EMPLOYEE_UPDATE+empId: _URL._HOSPITAL_ADD;
-
+    URL =  isEditPage()? _URL._EMPLOYEE_UPDATE+empId: _URL._EMPLOYEE_ADD;
+debugger;
     
     axios
     .post(URL, param).then((response) => {

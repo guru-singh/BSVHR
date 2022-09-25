@@ -14,7 +14,7 @@ const _URL = {
         _EMPLOYEE_DETAILS: '/employee-details/',
         _EMPLOYEE_MASTER: '/employee-master',
         _EMPLOYEE_UPDATE:'/employee-update/',
-        _EMPLOYEE_ADD:'/employee-add/',
+        _EMPLOYEE_ADD:'/employee-add',
         _EMPLOYEE:'/employees',
 
     }

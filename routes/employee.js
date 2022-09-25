@@ -16,6 +16,7 @@ router.get('/employees/list', controller.getEmployeesList);
 
 // // // update
 router.get('/employee-edit/:id', controller.getEmployeeDetailsPage);
+
 router.get('/employee-details/:empId', controller.getEmployeeDetailsById);
 router.get('/employee-master', controller.getMasterData);
 router.post('/employee-update/:empId', controller.updateEmployee);
@@ -26,7 +27,7 @@ router.post('/employee-delete/:empId', controller.deleteEmployee);
 
 
 // // //ADD
-// // router.get('/employees-add/', controller.getHospitalDetailsPage);
-// // router.post('/employees-add/', controller.addNewHospital);
+router.get('/employee-add/', controller.getEmployeeDetailsPage);
+router.post('/employee-add/', controller.addNewEmployee);
 
 module.exports = router;

@@ -103,8 +103,6 @@ exports.getEmployeeDetailsById = (req, res, next) => {
 };
 
 
-
-
 getEmployeeDetailsById = (objParam) => {
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
@@ -142,7 +140,7 @@ exports.updateEmployee = (req, res, next) => {
 
 function updateEmployee( objParam ) {
     console.log('--------------------------------')
-    console.log(objParam.empId)
+    console.log(objParam)
     console.log('--------------------------------')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
@@ -166,10 +164,11 @@ function updateEmployee( objParam ) {
                     .input("DOJ", sql.NVarChar, objParam.txtDOJ)
                     .input("isDisabled", sql.Bit, objParam.chkDisable)
                     .input("comments", sql.NVarChar, (objParam.txtNewComment))
+                    .input("email", sql.NVarChar, (objParam.txtEmail))
                     
                     .execute("USP_BSVHR_UPDATE_EMPLOYEE_DETAILS_BY_ID")
                     .then(function (resp) {
-                        console.log(resp.recordset)
+                        //console.log(resp.recordset)
                         resolve(resp.recordset);
                         dbConn.close();
                     })
@@ -219,5 +218,19 @@ getMasterData = (objParam) => {
     });
 };
 /************* MASTER MODULE *************/
+
+/************* ADD MODULE *************/
+
+exports.addNewEmployee = (req, res, next) => {
+    let params = Object.assign({id:null}, req.body);
+    console.log('*****************************')
+    console.log(params)
+    console.log('*****************************')
+    updateEmployee(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
+
+/************* ADD MODULE *************/
 
 

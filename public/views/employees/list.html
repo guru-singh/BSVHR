@@ -18,7 +18,7 @@
   <div class="">
     <div class="row">
       <div class="col-lg-6"><strong>Add Employee</strong></div>
-      <div class="col-lg-6 text-right"><a href="detail.html" class="btn btn-success">Add</a></div>
+      <div class="col-lg-6 text-right"><a id="addNewEmp" href="detail.html" class="btn btn-success">Add</a></div>
     </div>  
 
     <div class="table-responsive">
@@ -59,6 +59,8 @@
   <script>
       $(function() {
          // console.log( "ready!" );
+         $('#addNewEmp').attr('href', `${_URL._EMPLOYEE_ADD}`);
+         
           getEmployeeList();
   
           $('#employeesList').DataTable({
