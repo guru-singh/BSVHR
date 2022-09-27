@@ -30,4 +30,14 @@ router.post('/employee-delete/:empId', controller.deleteEmployee);
 router.get('/employee-add/', controller.getEmployeeDetailsPage);
 router.post('/employee-add/', controller.addNewEmployee);
 
+
+
+// // //ADD
+router.get('/employee-add/', controller.getEmployeeDetailsPage);
+router.post('/employee-add/', controller.addNewEmployee);
+
+
+
+
+
 module.exports = router;

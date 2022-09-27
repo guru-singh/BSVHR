@@ -139,9 +139,9 @@ exports.updateEmployee = (req, res, next) => {
 };
 
 function updateEmployee( objParam ) {
-    console.log('--------------------------------')
-    console.log(objParam)
-    console.log('--------------------------------')
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -223,9 +223,9 @@ getMasterData = (objParam) => {
 
 exports.addNewEmployee = (req, res, next) => {
     let params = Object.assign({id:null}, req.body);
-    console.log('*****************************')
-    console.log(params)
-    console.log('*****************************')
+    // console.log('*****************************')
+    // console.log(params)
+    // console.log('*****************************')
     updateEmployee(params).then(result => {
         res.status(_STATUSCODE).json(result)
     })

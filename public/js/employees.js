@@ -27,7 +27,7 @@ function populateDataTable(data) {
         var i = 1;
         data.forEach(item => {
             $('#employeesList').dataTable().fnAddData([
-                i,
+               // i,
                 item.empnumber,
                 item.designation,
                 item.firstName,
@@ -40,7 +40,9 @@ function populateDataTable(data) {
                 item.regionName,
                 item.doj,
                 item.comments.split('/r/n')[0],
-                `<a href='${_URL._EMPLOYEE_EDIT}${item.empId}'>Edit</a> | <a href='javascript:void(0)' onclick='DeleteEmployee(${item.empId},"${item.firstName}");return false;'>Delete</a>`
+                `<a href='${_URL._EMPLOYEE_EDIT}${item.empId}'>Edit</a> | 
+                <a href='${_URL._EMPLOYEE_HERARCHY}${item.empId}'>Change Manager</a> | 
+                <a href='javascript:void(0)' onclick='DeleteEmployee(${item.empId},"${item.firstName}");return false;'>Delete</a>`
             ]);
             i++;
         });
