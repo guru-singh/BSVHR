@@ -234,3 +234,169 @@ exports.addNewEmployee = (req, res, next) => {
 /************* ADD MODULE *************/
 
 
+/************* EMPLOYEE HOSPITAL MODULE *************/
+
+exports.getAssingedHospitalPage = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/emp-hos/assignedhospital.html`);
+};
+
+exports.getAssingedHospitaList = (req, res, next) => {
+     // console.log(req.params)
+    getAssingedHospitaList(req.params).then((result) => {
+        res.status(_STATUSCODE).json(result);
+    });
+};
+
+
+getAssingedHospitaList = (objParam) => {
+     //console.log(objParam.empId)
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("empId", sql.Int, objParam.empId)
+                    .execute("USP_BSVHR_UPDATE_EMP_HOSPITAL_LIST")
+                    .then(function (resp) {
+                        resolve(resp.recordsets);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        //console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                //console.log(err);
+            });
+    });
+};
+
+
+
+
+exports.removeHospitalFromEmployeeList = (req, res, next) => {
+    //console.log('removeHospitalFromEmployeeList')
+    //console.log(req.params)
+    //console.log('--------------------------')
+    removeHospitalFromEmployeeList(req.params).then((result) => {
+      res.status(_STATUSCODE).json(result);
+  });
+};
+
+
+removeHospitalFromEmployeeList = (objParam) => {
+   // console.log(objParam)
+   return new Promise((resolve) => {
+       var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+       dbConn
+           .connect()
+           .then(function () {
+               var request = new sql.Request(dbConn);
+               request
+                   .input("empId", sql.Int, objParam.empId)
+                   .input("hospitalId", sql.Int, objParam.hospitalId)
+                   .execute("USP_BSVHR_REMOVE_HOSPITAL_FROM_EMP_LIST")
+                   .then(function (resp) {
+                       resolve(resp.recordset);
+                       dbConn.close();
+                   })
+                   .catch(function (err) {
+                       //console.log(err);
+                       dbConn.close();
+                   });
+           })
+           .catch(function (err) {
+               //console.log(err);
+           });
+   });
+};
+
+
+
+exports.getAssignNewHospitalToEmployeePage = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/emp-hos/assign-new-hospital.html`);
+};
+
+
+
+
+exports.getUnAssingedHospitals = (req, res, next) => {
+    // console.log(req.params)
+   getUnAssingedHospitals(req.params).then((result) => {
+       res.status(_STATUSCODE).json(result);
+   });
+};
+
+
+getUnAssingedHospitals = (objParam) => {
+    //console.log(objParam.empId)
+   return new Promise((resolve) => {
+       var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+       dbConn
+           .connect()
+           .then(function () {
+               var request = new sql.Request(dbConn);
+               request
+                   //.input("empId", sql.Int, objParam.empId)
+                   .execute("USP_BSVHR_GET_UN_ASSINGED_HOSPITALS")
+                   .then(function (resp) {
+                       resolve(resp.recordset);
+                       dbConn.close();
+                   })
+                   .catch(function (err) {
+                       //console.log(err);
+                       dbConn.close();
+                   });
+           })
+           .catch(function (err) {
+               //console.log(err);
+           });
+   });
+};
+
+exports.updateUnAssingedHosptalstoEmployee = (req, res, next) => {
+    //console.log(req.body)
+    updateUnAssingedHosptalstoEmployee(req.body).then((result) => {
+       res.status(_STATUSCODE).json(result);
+   });
+};
+
+updateUnAssingedHosptalstoEmployee = (objParam) => {
+    //console.log(objParam.param)
+    let qry = [];
+    objParam.param.forEach(rec => {
+        qry.push(`Exec USP_BSVHR_UPDATE_UN_ASSINGED_HOSPITALS_TO_EMPLOYEE ${rec.empId}, ${rec.hospitalId};`)
+    });
+    //console.log(qry.join(''))
+   return new Promise((resolve) => {
+       var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+       dbConn
+           .connect()
+           .then(function () {
+               var request = new sql.Request(dbConn);
+               request
+                   //.input("empId", sql.Int, objParam.empId)
+                   //.execute("USP_BSVHR_GET_UN_ASSINGED_HOSPITALS")
+                   .query(qry.join(''))
+                   .then(function (resp) {
+                       resolve(resp.recordset);
+                       dbConn.close();
+                   })
+                   .catch(function (err) {
+                       //console.log(err);
+                       dbConn.close();
+                   });
+           })
+           .catch(function (err) {
+               //console.log(err);
+           });
+   });
+};
+
+
+/************* EMPLOYEE HOSPITAL MODULE *************/
+
+

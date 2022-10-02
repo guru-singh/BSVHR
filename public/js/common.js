@@ -16,7 +16,17 @@ const _URL = {
         _EMPLOYEE_UPDATE:'/employee-update/',
         _EMPLOYEE_ADD:'/employee-add',
         _EMPLOYEE:'/employees',
-        _EMPLOYEE_HERARCHY: '/employee-hierarchy/'
+        _EMPLOYEE_HERARCHY: '/employee-hierarchy/',
+        _EMPLOYEE_HERARCHY_EMP_AND_PARENT: '/employee-hierarchy-details/',
+        _EMPLOYEE_HERARCHY_MGR_LIST: '/employee-hierarchy-mgr-list/',
+        _EMPLOYEE_HERARCHY_EMP_MGR_UPDATE: '/employee-hierarchy-mgr-update/',
+        _EMPLOYEE_HOSPITAL: '/employee-hospital/',
+        _EMPLOYEE_HOSPITAL_LIST: '/employee-hospital-list/',
+        _EMPLOYEE_HOSPITAL_EDIT: '/employee-hospital-edit/',
+        _EMPLOYEE_HOSPITAL_NEW: '/employee-hospital-new/',
+        _EMPLOYEE_HOSPITAL_UN_ASSIGNED: '/employee-hospital-un-assigned',
+        _EMPLOYEE_HOSPITAL_UN_ASSIGNED_UPDATE: '/employee-hospital-un-assigned-update'
+        
 
     }
 
@@ -48,7 +58,6 @@ function isEditPage(){
 }
 
 function loadComboBox(data, dropdown, displayValue, displayText, optionTextAlongWithDisplayText, txtFormat) {
-    
     $('#' + dropdown).empty();
     //$('#' + dropdown).append($('<option></option>').val('').html('---- Select ----'));
 
@@ -76,6 +85,7 @@ function loadComboBox(data, dropdown, displayValue, displayText, optionTextAlong
         case 'cmbZone':
             selectHeader = 'Select Zone';
         break;
+
         default:
             selectHeader = '----Select----';
             break;
@@ -86,11 +96,14 @@ function loadComboBox(data, dropdown, displayValue, displayText, optionTextAlong
         let text = (item[displayText]) ? formatText(item[displayText], txtFormat) : '',
             optinalText = ((optionTextAlongWithDisplayText) ? item[optionTextAlongWithDisplayText] : ''),
             textPlusOptionl = text + ((optinalText.length > 0) ? ' - ' + optinalText.toUpperCase() : '');
+
+
         //  console.log('-------------------------------------------')
         //  console.log(text)
         //  console.log(optinalText)
         //  console.log()
         //  console.log('-------------------------------------------')
+
         $('#' + dropdown).append(
             $('<option></option>').val(item[displayValue]).html((textPlusOptionl))
         );
@@ -98,7 +111,7 @@ function loadComboBox(data, dropdown, displayValue, displayText, optionTextAlong
 }
 
 function formatText(str, type) {
-//    console.log('text format -->' + type)
+    //console.log('text format -->' + type)
     switch(type) {
         case 'UPPER':
             return str.toUpperCase()
@@ -119,4 +132,9 @@ function camelCaseText(str) {
         }
         return arr.join(" ");
     }
+}
+
+function getIdFromURL() {
+    let urlArr = window.location.href.split('/');
+    return urlArr[urlArr.length - 1];
 }

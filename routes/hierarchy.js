@@ -11,6 +11,9 @@ router.use((req, res, next) => {
 // //   //listing
 
 router.get('/employee-hierarchy/:id', controller.hierarchyPage);
+router.get('/employee-hierarchy-details/:empId', controller.getEmployeeAndParentDetails);
+router.get('/employee-hierarchy-mgr-list/:empId', controller.getManagerList);
+router.post('/employee-hierarchy-mgr-update/', controller.updateManager);
 // router.get('/employees/list', controller.getEmployeesList);
 
 

@@ -23,11 +23,12 @@ function populateDataTable(data) {
     //  console.log(length)
     if (length == 0) {
         $("#employeesList").DataTable().clear();
+        $("#empHospitalList .dataTables_empty").html('xxxx')
     } else {
-        var i = 1;
+
         data.forEach(item => {
+
             $('#employeesList').dataTable().fnAddData([
-               // i,
                 item.empnumber,
                 item.designation,
                 item.firstName,
@@ -40,11 +41,13 @@ function populateDataTable(data) {
                 item.regionName,
                 item.doj,
                 item.comments.split('/r/n')[0],
-                `<a href='${_URL._EMPLOYEE_EDIT}${item.empId}'>Edit</a> | 
-                <a href='${_URL._EMPLOYEE_HERARCHY}${item.empId}'>Change Manager</a> | 
+                `<a href='${_URL._EMPLOYEE_EDIT}${item.empId}'>Edit</a> | <br>
+                <a href='${_URL._EMPLOYEE_HERARCHY}${item.empId}'>Change Manager</a> | <br>
+                ${item.designation === 'KAM' ?
+                    `<a href=${_URL._EMPLOYEE_HOSPITAL}${item.empId}>List of Hospitals</a> | <br>` : ''}
+                
                 <a href='javascript:void(0)' onclick='DeleteEmployee(${item.empId},"${item.firstName}");return false;'>Delete</a>`
             ]);
-            i++;
         });
     }
 }
@@ -83,7 +86,7 @@ function getMasterData() {
 }
 function getEmployeeDetails() {
     getMasterData();
-    
+
     if (!isEditPage()) {
         $('#txtEmail').prop('readonly', false);
         $('#dvOldComments').hide();
@@ -96,12 +99,12 @@ function getEmployeeDetails() {
 
     axios
         .get(`${_URL._EMPLOYEE_DETAILS}${empId}`).then((response) => {
-           // console.log(response.data)
+            // console.log(response.data)
             let empDetails = response.data[0];
             //   combzone
             //   cmbState
             //   cmbDesignation
-           // console.log(empDetails)
+            // console.log(empDetails)
             $('#txtHqCode').val(empDetails.HoCode);
             $('#txtEmpNumber').val(empDetails.EmpNumber);
             $('#txtFirstName').val(empDetails.firstName);
@@ -141,10 +144,9 @@ function cmbValues() {
 }
 
 
-function validateMe()
-{
+function validateMe() {
     let urlArr = window.location.href.split('/'),
-    empId = urlArr[urlArr.length - 1];
+        empId = urlArr[urlArr.length - 1];
 
 
 
@@ -164,20 +166,152 @@ function validateMe()
         txtNewComment: $('#txtNewComment').val(),
         chkDisable: ($('#chkDisable').val() === 'on')
     },
-    URL =  isEditPage()? _URL._EMPLOYEE_UPDATE+empId: _URL._EMPLOYEE_ADD;
-debugger;
-    
+        URL = isEditPage() ? _URL._EMPLOYEE_UPDATE + empId : _URL._EMPLOYEE_ADD;
+    debugger;
+
     axios
-    .post(URL, param).then((response) => {
-        console.log(response.data[0])
-        let res = response.data[0];
-        if (res.sucess === 'true') {
-             redirect(_URL._EMPLOYEE);
-        } else {
-            $('#lblMsg').text(res.msg);
-        }
-    }).catch((err) => {
-        console.log(err);
-    });
-    
+        .post(URL, param).then((response) => {
+            console.log(response.data[0])
+            let res = response.data[0];
+            if (res.sucess === 'true') {
+                redirect(_URL._EMPLOYEE);
+            } else {
+                $('#lblMsg').text(res.msg);
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+
 }
+
+
+/** EMPLOYEE MANAGER LIST */
+function setupEmployeeHospitalPage() {
+    console.log('ready to roll')
+    // get employee list
+    getEmployeeHospitalList()
+}
+
+function getEmployeeHospitalList() {
+    let empId = getIdFromURL();
+    console.log(empId)
+    axios
+        .get(`${_URL._EMPLOYEE_HOSPITAL_LIST}${empId}`).then((response) => {
+            // console.log(response.data)
+
+            populateEmployeeHospitalDataTable(response.data[0]);
+
+        }).catch((err) => {
+            console.log(err);
+        });
+    //console.log(formatText('this is my idea', 'UPPER'))
+}
+
+
+function populateEmployeeHospitalDataTable(data) {
+    //  console.log("populating data table...");
+    // clear the table before populating it with more data
+    $("#empHospitalList").DataTable().clear();
+    var length = data.length;
+    //  console.log(length)
+    if (length == 0) {
+        $("#empHospitalList").DataTable().clear();
+    } else {
+        var i = 1;
+        data.forEach(item => {
+            $('#empHospitalList').dataTable().fnAddData([
+                item.hospitalName,
+                item.regionName,
+                `<a href='javascript:void(0)' onclick='removeHospitalFromEmployeeList(${getIdFromURL()},${item.hospitalId}, "${item.hospitalName}");return false;'>Delete</a>`
+            ]);
+            i++;
+        });
+    }
+}
+//`<a href='javascript:void(0)' onClick=removeHospitalFromEmployeeList(${getIdFromURL()},${item.hospitalId},"")>${item.hospitalName} | Emp Remove</a>`
+
+function removeHospitalFromEmployeeList(empId, hospitalId, name) {
+    console.log(arguments)
+    let text = `Are you sure you want to remove "${name} from the selected employee"`; // "Are you sure you want to delete '+  +'!\nEither OK or Cancel.";
+    if (confirm(text) == true) {
+        axios
+            .post(_URL._EMPLOYEE_HOSPITAL_EDIT + empId + '/' + hospitalId).then((response) => {
+                console.log(response.data[0])
+                alert(response.data[0].msg)
+
+            }).catch((err) => {
+                console.log(err);
+            });
+    } else {
+        text = "You canceled!";
+    }
+}
+
+
+
+function setupAssignNewHospitalToEmployeePage() {
+   // console.log('ready to roll')
+    // get employee list
+    getAllUnAssingedHospitals()
+}
+
+function getAllUnAssingedHospitals() {
+    axios
+        .get(`${_URL._EMPLOYEE_HOSPITAL_UN_ASSIGNED}`).then((response) => {
+           // console.log(response.data)
+            populateUnAssingedHospitalDataTable(response.data);
+
+        }).catch((err) => {
+            console.log(err);
+        });
+    //console.log(formatText('this is my idea', 'UPPER'))
+}
+
+
+function populateUnAssingedHospitalDataTable(data) {
+    //  console.log("populating data table...");
+    // clear the table before populating it with more data
+    $("#un-assinged-hospital-list").DataTable().clear();
+    var length = data.length;
+    //  console.log(length)
+    if (length == 0) {
+        $("#un-assinged-hospital-list").DataTable().clear();
+    } else {
+        data.forEach(item => {
+            $('#un-assinged-hospital-list').dataTable().fnAddData([
+                `<input type="checkbox" class="selectedchk" value="${item.hospitalId}"></input>`,
+                item.hospitalName,
+                item.regionName
+            ]);
+        });
+    }
+}
+
+function ValidateUnAssignedHospitals() {
+    console.log('get all the selcted checkbox');
+    var arr = [],
+        empId = getIdFromURL();
+    $('.selectedchk').each(function () {
+        if ($(this).prop('checked')) {
+            let o = {};
+            o.hospitalId = $(this).val();
+            o.empId = empId;
+            arr.push(o)
+        }
+    });
+    console.log(arr);
+    let param = {};
+    param.param = arr;
+    axios
+        .post(`${_URL._EMPLOYEE_HOSPITAL_UN_ASSIGNED_UPDATE}`, param).then((response) => {
+          //  console.log(response.data)
+           // populateUnAssingedHospitalDataTable(response.data);
+           redirect(`${_URL._EMPLOYEE_HOSPITAL}${empId}`)
+
+        }).catch((err) => {
+            console.log(err);
+        });
+  
+}
+
+/** EMPLOYEE MANAGER LIST */
