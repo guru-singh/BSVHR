@@ -64,14 +64,13 @@
           getEmployeeList();
   
           $('#employeesList').DataTable({
-                  "iDisplayLength": 100,
-                  "pageLength": 50,
-                  "paging": true,
-                  "language": {
-                      emptyTable: 'Loading data', // 
-                      loadingRecords: "Please wait .. ", // default Loading...
-                      zeroRecords: "No matching records found"
-                  }
+            "iDisplayLength": 100,
+                "paging": false,
+                "language": {
+                    emptyTable: 'Loading data', // 
+                    loadingRecords: "Please wait .. ", // default Loading...
+                    zeroRecords: "No matching records found"
+                }
               });
       });
       

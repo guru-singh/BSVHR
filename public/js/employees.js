@@ -40,10 +40,11 @@ function populateDataTable(data) {
                 item.hqname,
                 item.regionName,
                 item.doj,
-                item.comments.split('/r/n')[0],
+                //item.comments.split('/r/n')[0],
+                item.comments,
                 `<a href='${_URL._EMPLOYEE_EDIT}${item.empId}'>Edit</a> | <br>
                 <a href='${_URL._EMPLOYEE_HERARCHY}${item.empId}'>Change Manager</a> | <br>
-                ${item.designation === 'KAM' ?
+                ${item.designation === 'KAM' || item.designation === 'Sr KAM' ?
                     `<a href=${_URL._EMPLOYEE_HOSPITAL}${item.empId}>List of Hospitals</a> | <br>` : ''}
                 
                 <a href='javascript:void(0)' onclick='DeleteEmployee(${item.empId},"${item.firstName}");return false;'>Delete</a>`
@@ -100,7 +101,7 @@ function getEmployeeDetails() {
     axios
         .get(`${_URL._EMPLOYEE_DETAILS}${empId}`).then((response) => {
             // console.log(response.data)
-            let empDetails = response.data[0];
+            let empDetails = response.data[0][0];
             //   combzone
             //   cmbState
             //   cmbDesignation
