@@ -40,12 +40,15 @@ function populateDataTable(data) {
                 item.hqname,
                 item.regionName,
                 item.doj,
+                item.isDisabled,
                 //item.comments.split('/r/n')[0],
                 item.comments,
                 `<a href='${_URL._EMPLOYEE_EDIT}${item.empId}'>Edit</a> | <br>
                 <a href='${_URL._EMPLOYEE_HERARCHY}${item.empId}'>Change Manager</a> | <br>
                 ${item.designation === 'KAM' || item.designation === 'Sr KAM' ?
                     `<a href=${_URL._EMPLOYEE_HOSPITAL}${item.empId}>List of Hospitals</a> | <br>` : ''}
+                ${item.designation === 'ZBM' || item.designation === 'RBM' ?
+                    `<a href=${_URL._EMPLOYEE_MY_TEAM}${item.empId}>My Team</a> | <br>` : ''}
                 
                 <a href='javascript:void(0)' onclick='DeleteEmployee(${item.empId},"${item.firstName}");return false;'>Delete</a>`
             ]);
@@ -251,7 +254,7 @@ function removeHospitalFromEmployeeList(empId, hospitalId, name) {
 
 
 function setupAssignNewHospitalToEmployeePage() {
-   // console.log('ready to roll')
+    // console.log('ready to roll')
     // get employee list
     getAllUnAssingedHospitals()
 }
@@ -259,7 +262,7 @@ function setupAssignNewHospitalToEmployeePage() {
 function getAllUnAssingedHospitals() {
     axios
         .get(`${_URL._EMPLOYEE_HOSPITAL_UN_ASSIGNED}`).then((response) => {
-           // console.log(response.data)
+            // console.log(response.data)
             populateUnAssingedHospitalDataTable(response.data);
 
         }).catch((err) => {
@@ -305,14 +308,123 @@ function ValidateUnAssignedHospitals() {
     param.param = arr;
     axios
         .post(`${_URL._EMPLOYEE_HOSPITAL_UN_ASSIGNED_UPDATE}`, param).then((response) => {
-          //  console.log(response.data)
-           // populateUnAssingedHospitalDataTable(response.data);
-           redirect(`${_URL._EMPLOYEE_HOSPITAL}${empId}`)
+            //  console.log(response.data)
+            // populateUnAssingedHospitalDataTable(response.data);
+            redirect(`${_URL._EMPLOYEE_HOSPITAL}${empId}`)
 
         }).catch((err) => {
             console.log(err);
         });
-  
+
 }
 
 /** EMPLOYEE MANAGER LIST */
+
+
+
+/** my team list */
+function getMyTeam() {
+    let empId = getIdFromURL();
+  //  console.log(empId)
+    let param = {
+        method: 'getEmployeesList',
+        empId
+    };
+
+ //   console.log(param)
+    axios
+        .get(_URL._EMPLOYEE_MY_TEAM_LIST + empId, param).then((response) => {
+            // console.log(response.data);
+            let data = response.data;
+            var chartData = {};
+            var empId = getIdFromURL();
+            //console.log(empId)
+            MyDetails = data.filter(emp => {
+                // console.log(emp) 
+                return (emp.EmpID == empId)
+            });
+            //console.log(MyDetails[0])
+            chartData = {
+                name: MyDetails[0].FIRSTName,
+                //name: 'root',
+                empId: MyDetails[0].EmpID,
+                children: []
+            };
+            var children = chartData.children;
+            data.forEach(emp => {
+                let parentId = emp.ParentId;
+                if (emp.ParentId) {
+                    if (empId == parentId) {
+                        // do nothing
+                        children.push({
+                            name: emp.FIRSTName,
+                            empId: emp.EmpID,
+                            value: emp.EmpID,
+                            children: []
+                        })
+                    } else {
+                        //console.log(empId, emp.ParentId, emp.EmpID)
+                        //console.log('Search in children')
+                        let parentDetails = children.find(child => {
+                            return (child.empId == parentId)
+                        })
+                        parentDetails.children.push({
+                            name: emp.FIRSTName,
+                            empId: emp.EmpID,
+                            value: emp.EmpID,
+                           // children: []
+                        });
+
+
+                    }
+                } else {
+                    //  console.log('Parent Id is null')
+                }
+            });
+
+            //debugger
+            console.log(chartData)
+            // chartData = {
+            //     name: "Sreejani Biswas",
+            //     children: [
+            //       {name: "Kamlesh Vishwakarma",value: 3},
+            //       {
+            //         name: "Yogesh Sutar",value: 3
+            //       },
+            //       {
+            //         name: "Vinay Bajaj",value: 3
+            //       },
+            //       {
+            //         name: "nodeB",
+            //         children: [
+            //           {
+            //             name: "leafBA",
+            //             value: 5
+            //           },
+            //           {
+            //             name: "leafBB",
+            //             value: 1
+            //           }
+            //         ]
+            //       }
+            //     ]
+            //   };
+
+            const color = d3.scaleOrdinal(d3.schemePaired);
+            Sunburst()
+                .data(chartData)
+                 .color(d => color(d.name))
+                // .minSliceAngle(.4)
+                 .excludeRoot(false)
+                // .maxLevels(10)
+                 .showLabels(true)
+                .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
+                (document.getElementById('chart'));
+
+            // populateDataTable(response.data);
+
+        }).catch((err) => {
+            console.log(err);
+        });
+}
+/** my team list */

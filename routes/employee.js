@@ -48,6 +48,11 @@ router.get('/employee-hospital-un-assigned', controller.getUnAssingedHospitals);
 router.post('/employee-hospital-un-assigned-update', controller.updateUnAssingedHosptalstoEmployee);
 
 
+router.get('/employee-my-team/:empId', controller.getMyTeam);
+router.get('/employee-my-team-list/:empId', controller.getMyTeamList);
+
+
+
 //router.post('/employee-add/', controller.addNewEmployee);
 
 

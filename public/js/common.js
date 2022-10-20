@@ -25,7 +25,9 @@ const _URL = {
         _EMPLOYEE_HOSPITAL_EDIT: '/employee-hospital-edit/',
         _EMPLOYEE_HOSPITAL_NEW: '/employee-hospital-new/',
         _EMPLOYEE_HOSPITAL_UN_ASSIGNED: '/employee-hospital-un-assigned',
-        _EMPLOYEE_HOSPITAL_UN_ASSIGNED_UPDATE: '/employee-hospital-un-assigned-update'
+        _EMPLOYEE_HOSPITAL_UN_ASSIGNED_UPDATE: '/employee-hospital-un-assigned-update',
+        _EMPLOYEE_MY_TEAM: '/employee-my-team/',
+        _EMPLOYEE_MY_TEAM_LIST: '/employee-my-team-list/'
         
 
     }

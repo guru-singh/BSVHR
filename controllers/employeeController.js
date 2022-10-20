@@ -323,6 +323,8 @@ exports.getAssignNewHospitalToEmployeePage = (req, res, next) => {
 
 
 
+
+
 exports.getUnAssingedHospitals = (req, res, next) => {
     // console.log(req.params)
    getUnAssingedHospitals(req.params).then((result) => {
@@ -398,5 +400,51 @@ updateUnAssingedHosptalstoEmployee = (objParam) => {
 
 
 /************* EMPLOYEE HOSPITAL MODULE *************/
+/************* EMPLOYEE TEAM MODULE *************/
+exports.getMyTeam = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/employees/my-team.html`);
+};
+
+
+
+exports.getMyTeamList = (req, res, next) => {
+    getMyTeamList(req.params).then((result) => {
+        res.status(_STATUSCODE).json(result);
+    });
+};
+
+
+getMyTeamList = (objParam) => {
+    console.log('I am Here', objParam);
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("empId", sql.Int, objParam.empId)
+                    .execute("USP_BSVHR_GET_MY_TEAM")
+                    .then(function (resp) {
+                        // console.log(resp)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        //console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                //console.log(err);
+            });
+    });
+};
+/************* EMPLOYEE TEAM MODULE *************/
+
+
+
+
+
 
 
