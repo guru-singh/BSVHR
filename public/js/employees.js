@@ -325,99 +325,153 @@ function ValidateUnAssignedHospitals() {
 /** my team list */
 function getMyTeam() {
     let empId = getIdFromURL();
-  //  console.log(empId)
+    //  console.log(empId)
     let param = {
         method: 'getEmployeesList',
         empId
     };
 
- //   console.log(param)
+    //   console.log(param)
     axios
         .get(_URL._EMPLOYEE_MY_TEAM_LIST + empId, param).then((response) => {
             // console.log(response.data);
             let data = response.data;
+            // var chartData = {};
+            // var empId = getIdFromURL();
+            // //console.log(empId)
+            // MyDetails = data.filter(emp => {
+            //     // console.log(emp) 
+            //     return (emp.EmpID == empId)
+            // });
+            // //console.log(MyDetails[0])
+            // chartData = {
+            //     name: MyDetails[0].FIRSTName,
+            //     //name: 'root',
+            //     empId: MyDetails[0].EmpID,
+            //     children: []
+            // };
+            // debugger;
+            // var children = chartData.children;
+            // data.forEach(emp => {
+            //     let parentId = emp.ParentId;
+            //     if (emp.ParentId) {
+            //         if (empId == parentId) {
+            //             // do nothing
+            //             children.push({
+            //                 name: emp.FIRSTName,
+            //                 empId: emp.EmpID,
+            //                 value: emp.EmpID,
+            //                 children: []
+            //             })
+            //         } else {
+            //             //console.log(empId, emp.ParentId, emp.EmpID)
+            //             //console.log('Search in children')
+            //             let parentDetails = children.find(child => {
+            //                 return (child.empId == parentId)
+            //             })
+            //             parentDetails.children.push({
+            //                 name: emp.FIRSTName,
+            //                 empId: emp.EmpID,
+            //                 value: emp.EmpID,
+            //                 children: []
+            //             });
+
+
+            //         }
+            //     } else {
+            //         //  console.log('Parent Id is null')
+            //     }
+            // });
+
+            // debugger
+            // console.log(chartData)
+            // // chartData = {
+            // //     name: "Sreejani Biswas",
+            // //     children: [
+            // //       {name: "Kamlesh Vishwakarma",value: 3},
+            // //       {
+            // //         name: "Yogesh Sutar",value: 3
+            // //       },
+            // //       {
+            // //         name: "Vinay Bajaj",value: 3
+            // //       },
+            // //       {
+            // //         name: "nodeB",
+            // //         children: [
+            // //           {
+            // //             name: "leafBA",
+            // //             value: 5
+            // //           },
+            // //           {
+            // //             name: "leafBB",
+            // //             value: 1
+            // //           }
+            // //         ]
+            // //       }
+            // //     ]
+            // //   };
+
+
+
             var chartData = {};
-            var empId = getIdFromURL();
-            //console.log(empId)
-            MyDetails = data.filter(emp => {
+            MyDetails = data.find(emp => {
                 // console.log(emp) 
                 return (emp.EmpID == empId)
             });
-            //console.log(MyDetails[0])
-            chartData = {
-                name: MyDetails[0].FIRSTName,
+            chartData = [{
+                name: `${MyDetails.FIRSTName} (${MyDetails.Designation})`,
                 //name: 'root',
-                empId: MyDetails[0].EmpID,
+                empId: MyDetails.EmpID,
+                desig: MyDetails.Designation,
+                value: empId,
                 children: []
-            };
-            var children = chartData.children;
+            }];
+
+            var oldId = 0;
             data.forEach(emp => {
-                let parentId = emp.ParentId;
+                //console.log('oldId--->'+ oldId)
                 if (emp.ParentId) {
-                    if (empId == parentId) {
-                        // do nothing
-                        children.push({
-                            name: emp.FIRSTName,
-                            empId: emp.EmpID,
-                            value: emp.EmpID,
-                            children: []
-                        })
-                    } else {
-                        //console.log(empId, emp.ParentId, emp.EmpID)
-                        //console.log('Search in children')
-                        let parentDetails = children.find(child => {
-                            return (child.empId == parentId)
-                        })
-                        parentDetails.children.push({
-                            name: emp.FIRSTName,
-                            empId: emp.EmpID,
-                            value: emp.EmpID,
-                           // children: []
-                        });
+                    //    console.log('got ParentId -->' + oldId)
 
+                    childrenData = (getMyChildren(data, oldId));
 
+                    // console.log('got child data-->'+ childrenData.length)
+                    chtData = findObject(chartData, 'empId', oldId);
+
+                    //console.log(chtData)
+                    if (chtData) {
+                        childrenData.forEach(child => {
+                            chtData[0].children.push({
+                                name: `${child.FIRSTName} (${child.Designation})`,
+                                empId: child.EmpID,
+                                desig: child.Designation,
+                                value: emp.EmpID,
+                                children: []
+                            })
+                        })
                     }
-                } else {
-                    //  console.log('Parent Id is null')
+                   // console.log('*********')
                 }
-            });
+                else {
+                    // do notihng, as we have already created it
 
-            //debugger
-            console.log(chartData)
-            // chartData = {
-            //     name: "Sreejani Biswas",
-            //     children: [
-            //       {name: "Kamlesh Vishwakarma",value: 3},
-            //       {
-            //         name: "Yogesh Sutar",value: 3
-            //       },
-            //       {
-            //         name: "Vinay Bajaj",value: 3
-            //       },
-            //       {
-            //         name: "nodeB",
-            //         children: [
-            //           {
-            //             name: "leafBA",
-            //             value: 5
-            //           },
-            //           {
-            //             name: "leafBB",
-            //             value: 1
-            //           }
-            //         ]
-            //       }
-            //     ]
-            //   };
+                }
+                oldId = emp.EmpID
+            })
+
+
+
+            
+          //  console.log(...chartData)
 
             const color = d3.scaleOrdinal(d3.schemePaired);
             Sunburst()
-                .data(chartData)
-                 .color(d => color(d.name))
-                // .minSliceAngle(.4)
-                 .excludeRoot(false)
-                // .maxLevels(10)
-                 .showLabels(true)
+                .data(...chartData)
+                .color(d => color(d.name))
+                 .minSliceAngle(.4)
+                .excludeRoot(true)
+                 .maxLevels(10)
+                .showLabels(true)
                 .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
                 (document.getElementById('chart'));
 
@@ -427,4 +481,29 @@ function getMyTeam() {
             console.log(err);
         });
 }
+
+function findObject(obj = {}, key, value) {
+    const result = [];
+    function recursiveSearch(obj = {}) {
+        if (!obj || typeof obj !== 'object') {
+            return;
+        };
+        if (obj[key] === value) {
+            result.push(obj);
+        };
+        Object.keys(obj).forEach(function (k) {
+            recursiveSearch(obj[k]);
+        });
+    } recursiveSearch(obj);
+    return result;
+} console.log();
+
+function getMyChildren(data, id) {
+    let children = data.filter(emp => {
+        return (emp.ParentId == id)
+    });
+    return children;
+}
+
+
 /** my team list */
