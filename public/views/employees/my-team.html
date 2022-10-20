@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Add Employee</title>
+  <title>My Team</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -23,29 +23,29 @@
     <div id="chart"></div>
     <div id="chart1"></div>
     <script>
-      const CHILDREN_PROB_DECAY = 0.15; // per level
-      const MAX_CHILDREN = 20;
-      const MAX_VALUE = 100;
+    //   const CHILDREN_PROB_DECAY = 0.15; // per level
+    //   const MAX_CHILDREN = 20;
+    //   const MAX_VALUE = 100;
   
-      function genNode(name='root', probOfChildren=1) {
-        if (Math.random() < probOfChildren) {
-          return {
-            name,
-            children: [...Array(Math.round(Math.random() * MAX_CHILDREN))]
-              .map((_, i) => genNode(i, probOfChildren - CHILDREN_PROB_DECAY))
-          }
-        } else {
-          return {
-            name,
-            value: Math.round(Math.random() * MAX_VALUE)
-          }
-        }
-      }
-      let data = genNode(); 
-      console.log(data)
+    //   function genNode(name='root', probOfChildren=1) {
+    //     if (Math.random() < probOfChildren) {
+    //       return {
+    //         name,
+    //         children: [...Array(Math.round(Math.random() * MAX_CHILDREN))]
+    //           .map((_, i) => genNode(i, probOfChildren - CHILDREN_PROB_DECAY))
+    //       }
+    //     } else {
+    //       return {
+    //         name,
+    //         value: Math.round(Math.random() * MAX_VALUE)
+    //       }
+    //     }
+    //   }
+    //   let data = genNode(); 
+    //   console.log(data)
       
       
-     const color = d3.scaleOrdinal(d3.schemePaired);
+    //  const color = d3.scaleOrdinal(d3.schemePaired);
   
     //   Sunburst()
     //     .data(data)
