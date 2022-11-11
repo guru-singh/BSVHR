@@ -102,15 +102,18 @@ function getQueryStringValue(key) {
 }
 
 function validateMe() {
+    //debugger;
     let urlArr = window.location.href.split('/'),
     hospitalId = urlArr[urlArr.length - 1];
+    // console.log($('#chkIsDisable').is(":checked"));
+    //console.log(hospitalId);
 
-console.log(hospitalId);
     let param = {
         hospitalName : $('#txtHospitalName').val(),
         hospitalregion : $('#txtRegionName').val(),
-        isDisabled : $('#chkIsDisable').val()
-    },
+        isDisabled : $('#chkIsDisable').is(":checked") ? 'Checked' : ''
+    }
+    
     URL =  isEditPage()? _URL._HOSPITAL_UPDATE+hospitalId: _URL._HOSPITAL_ADD
     
     axios
