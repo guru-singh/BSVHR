@@ -152,7 +152,7 @@ function validateMe() {
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 1];
 
-
+    console.log($('#chkDisable').is(":checked"));
 
     let param = {
         cmbZone: $('#cmbZone').val(),
@@ -168,10 +168,10 @@ function validateMe() {
         txtEmail: $('#txtEmail').val(),
         txtPassword: $('#txtPassword').val(),
         txtNewComment: $('#txtNewComment').val(),
-        chkDisable: ($('#chkDisable').val() === 'on')
+        //chkDisable: ($('#chkDisable').val() === 'on')
+        chkDisable: $('#chkDisable').is(":checked")
     },
         URL = isEditPage() ? _URL._EMPLOYEE_UPDATE + empId : _URL._EMPLOYEE_ADD;
-    debugger;
 
     axios
         .post(URL, param).then((response) => {
