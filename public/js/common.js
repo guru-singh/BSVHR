@@ -140,3 +140,7 @@ function getIdFromURL() {
     let urlArr = window.location.href.split('/');
     return urlArr[urlArr.length - 1];
 }
+
+function goBack() {
+    window.history.back()
+}
