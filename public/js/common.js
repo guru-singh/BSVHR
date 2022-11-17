@@ -144,3 +144,15 @@ function getIdFromURL() {
 function goBack() {
     window.history.back()
 }
+
+function loadHeader() {
+    $('#header').load('./includes/header.html');
+}
+
+// function loadFooter() {
+    
+// }
+
+setTimeout(() => {
+    loadHeader();
+}, 1000);

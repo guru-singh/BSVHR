@@ -1,24 +1,76 @@
-<script src="../../js/common.js"></script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="../../js/common.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/axios.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script> -->
+
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css/datatables.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="../../css/app.css" />
+
+</head>
+<body>
+
+    <nav id="header"></nav>
+
+    <div class="container">
+        <h1>Add Hospital</h1>
+        <div id='lblMsg'></div>
+        <div class="text-right"><a href="/employees" class="btn btn-success">Back</a></div>
+
+        <form id="frm1" onsubmit="validateMe();return false;" class="form">
+
+            <div class="form-group">
+                <label for="txtHospitalName">Hospital Name</label>
+                <input type="text" class="form-control" id="txtHospitalName" placeholder="Hospital Name" />
+            </div>
+
+            <div class="form-group">
+                <label for="txtRegionName">Hospital Region Name</label>
+                <input type="text" class="form-control" id="txtRegionName" placeholder="Hospital Region Name" />
+            </div>
+
+            <!-- Hospital name: <input type="text" id="txtHospitalName" placeholder="Hospital Name" /><br><br>
+            region name: <input type="text" id="txtRegionName" placeholder="Hospital region Name" /><br><br> -->
+
+            <input type="checkbox" id="chkIsDisable" name="chkIsDisable" value=""> Check to mark it disable 
+
+            <div class="footer-btn reset">
+                <!-- <button type="submit" class="btn btn-default btn-grad">Submit</button> -->
+                <button type="submit" class="btn btn-default btn-grad">Submit</button>
+                <input type="reset" class="btn btn-default btn-grad" />
+            </div>
+
+            <!-- <button>Submit</button>
+            <input type="reset" /> -->
+        </form>
+    </div>
+
 <script src="../../js/jquery.min.js"></script>
+<script src="../../js/datatables.min.js"></script>
+<script src="../../js/common.js"></script>
 <script src="../../js/axios.min.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
-
-<div id='lblMsg'>
-
-</div>
-<form id="frm1" onsubmit="validateMe();return false;">
-    Hospital name: <input type="text" id="txtHospitalName" placeholder="Hospital Name" /><br><br>
-    region name: <input type="text" id="txtRegionName" placeholder="Hospital region Name" /><br><br>
-    <input type="checkbox" id="chkIsDisable" name="chkIsDisable" value=""> Check to mark it disable <br><br>
-    <button>Submit</button>
-    <input type="reset" />
-</form>
+<script src="../../js/admin.js"></script>
 
 <script src="../../js/hospitals.js"></script>
 <script>
     $(function () {
         // console.log( "ready!" );
-
         getHospitaDetails();
     });
 </script>
+    
+</body>
+</html>
+
+

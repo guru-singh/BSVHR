@@ -1,37 +1,59 @@
 <html>
 <head>
-    <title>List Hospital</title>
-    <script src="../../js/common.js"></script>
+    <title>Hospital List</title>
+
+    <!-- <script src="../../js/common.js"></script>
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/axios.min.js"></script>
-    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script> -->
 
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css/datatables.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="../../css/app.css" />
 
-    
 </head>
-<h1> List Hospitals</h1>
 
+<body>
 
-<H2><a href="/hospitals-add/">Add new Hospital</a></H2>
+    <nav id="header"></nav>
 
-<table id="hospitalList" class="display" style="width:100%">
-    <thead>
-        <tr>
-            <th>Sr No.</th>
-            <th>Hospital Name</th>
-            <th>Region</th>
-            <th>No of Bed</th>
-            <th>No of ICU Bed</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-</table>
+    <div class="container">
+        <h1>Hospital List</h1>
+        
+        <div class="text-right m-b-10">
+            <a href="/hospitals-add/" class="btn btn-success">Add</a>
+          </div>
+
+        <table id="hospitalList" class="display">
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Hospital Name</th>
+                    <th>Region</th>
+                    <th>No of Bed</th>
+                    <th>No of ICU Bed</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+   
 
 
    <!--Data Table-->
-   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
+   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
-   <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" /> -->
+
+   
+   <script src="../../js/jquery.min.js"></script>
+   <script src="../../js/datatables.min.js"></script>
+   <script src="../../js/common.js"></script>
+   <script src="../../js/axios.min.js"></script>
+   <script src="../../js/bootstrap.min.js"></script>
+   <script src="../../js/admin.js"></script>
+
 <!--Data Table-->
 
 <script src="../../js/hospitals.js"></script>
@@ -43,7 +65,8 @@
 
         $('#hospitalList').DataTable({
                 "iDisplayLength": 100,
-                "paging": false,
+                // "paging": false,
+                pageLength:5,
                 "language": {
                     emptyTable: 'Loading data', // 
                     loadingRecords: "Please wait .. ", // default Loading...
@@ -51,5 +74,8 @@
                 }
             });
     });
-    
     </script>
+</body>
+
+
+</html>
