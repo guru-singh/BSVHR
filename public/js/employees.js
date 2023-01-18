@@ -99,7 +99,7 @@ function getEmployeeDetails() {
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 1];
 
-    console.log(empId);
+    console.log(`${_URL._EMPLOYEE_DETAILS}${empId}`);
 
     axios
         .get(`${_URL._EMPLOYEE_DETAILS}${empId}`).then((response) => {
@@ -119,16 +119,19 @@ function getEmployeeDetails() {
             $('#txtEmail').val(empDetails.Email);
             $('#txtPassword').val(empDetails.Password);
             //$('#chkDisable').val(empDetails.)
-            empDetails.comments.toString().replaceAll('/r/n', '<br>')
+            if (empDetails.comments) {
+                empDetails.comments.toString().replaceAll('/r/n', '<br>');
+                var str = empDetails.comments.toString().replaceAll('/r/n', '<br>');
+                var regex = /<br\s*[\/]?>/gi;
+                $("#txtComment").val(str.replace(regex, "\n"));
+            }
+            
 
             $('#cmbZone').val(empDetails.ZoneID);
-            $('#txtStateId').val(empDetails.stateID);
+            $('#txtStateId').val(empDetails.StateID);
             $('#txtDesignation').val(empDetails.DesignationID);
 
-
-            var str = empDetails.comments.toString().replaceAll('/r/n', '<br>');
-            var regex = /<br\s*[\/]?>/gi;
-            $("#txtComment").val(str.replace(regex, "\n"));
+            
             setTimeout(
                 cmbValues
                 ,
@@ -168,8 +171,8 @@ function validateMe() {
         txtEmail: $('#txtEmail').val(),
         txtPassword: $('#txtPassword').val(),
         txtNewComment: $('#txtNewComment').val(),
-        //chkDisable: ($('#chkDisable').val() === 'on')
-        chkDisable: $('#chkDisable').is(":checked")
+        chkDisable: ($('#chkDisable').val() === 'on'),
+        cmbState: $('#cmbState').val(),
     },
         URL = isEditPage() ? _URL._EMPLOYEE_UPDATE + empId : _URL._EMPLOYEE_ADD;
 
