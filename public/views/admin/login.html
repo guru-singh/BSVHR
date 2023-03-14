@@ -1,22 +1,25 @@
 <html>
+
 <head>
-    <title>Login new routes</title>
-    <link rel="stylesheet" href="../../css/bootstrap.min.css"  />
-    <link rel="stylesheet" href="../../css/app.css"  />
+  <title>Login new routes</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+  <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../css/app.css" />
 </head>
+
 <body>
 
-    <div class="login-pop screen-1">
-        <div class="modal fade in" id="myModal" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <div class="text-center">
-                    <h2 class="project-name">
-                      BSV HR
-                    </h2>
+  <div class="login-pop screen-1">
+    <div class="modal fade in" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="text-center">
+              <h2 class="project-name">
+                BSV HR
+              </h2>
 
-                    <!-- <div id="lblmsg"></div>
+              <!-- <div id="lblmsg"></div>
                     <form class="login-form" id="frm1" method="post" action="/api" onsubmit="validateAdminUserDetails(); return false;">
                       <div class="form-group">
                         <label for="usr">Username</label>
@@ -33,33 +36,36 @@
                         </div>
                     </form> -->
 
-                    <div id="lblmsg"></div>
-                    <form class="login-form" onsubmit="letMeLogin();return false;">
-                        <div class="form-group">
-                            <label for="txtUsername">Username</label>
-                            <input type="text" name='txtUsername' id='txtUsername' placeholder="username" value="vishal.bajaj@bsvgroup.com" class="form-control" />
-                          </div>
-
-                          <div class="form-group">
-                            <label for="txtPassword">Username</label>
-                            <input type="password" name='txtPassword' id='txtPassword' placeholder="password" value='BSV@112233' class="form-control" />
-                          </div>
-                        <button class="btn btn-default btn-grad">Login</button>
-                    </form>
-                   
-                  </div>
+              <div id="lblmsg"></div>
+              <form class="login-form" onsubmit="letMeLogin();return false;">
+                <div class="form-group">
+                  <label for="txtUsername">Username</label>
+                  <input type="text" name='txtUsername' id='txtUsername' placeholder="username"
+                    value="vishal.bajaj@bsvgroup.com" class="form-control" />
                 </div>
-              </div>
+
+                <div class="form-group">
+                  <label for="txtPassword">Username</label>
+                  <input type="password" name='txtPassword' id='txtPassword' placeholder="password" value='BSV@112233'
+                    class="form-control" />
+                </div>
+                <button class="btn btn-default btn-grad">Login</button>
+              </form>
+
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    
 
-    <script src="../../js/common.js"></script>
-    <script src="../../js/jquery.min.js"></script>
-    <script src="../../js/axios.min.js"></script>
-    <script src="../../js/bootstrap.min.js"></script>
-    <script src="../../js/admin.js"></script>
+
+  <script src="../../js/common.js"></script>
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/axios.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/admin.js"></script>
 </body>
+
 </html>
