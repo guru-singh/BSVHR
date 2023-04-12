@@ -1,5 +1,4 @@
 function letMeLogin() {
-
     let param = {
         method: 'adminLogin',
         username: $('#txtUsername').val(),
@@ -41,7 +40,7 @@ function getAdminDashboardData() {
             console.log(response.data[0][0].TotalEmployees);
             $('#spTotalEmployee').text(response.data[0][0].TotalEmployees)
             $('#spTotalHospitals').text(response.data[1][0].TotalHospitals)
-          
+
         }).catch((err) => {
             console.log(err);
         });
