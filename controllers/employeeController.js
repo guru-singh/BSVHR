@@ -59,7 +59,7 @@ exports.deleteEmployee = (req, res, next) => {
 
 
 deleteEmployee = (objParam) => {
-   // console.log('delete employee', objParam.empId);
+    // console.log('delete employee', objParam.empId);
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -103,7 +103,7 @@ exports.getEmployeeDetailsById = (req, res, next) => {
 };
 
 
-getEmployeeDetailsById = (objParam) => {
+function getEmployeeDetailsById(objParam) {
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -119,7 +119,7 @@ getEmployeeDetailsById = (objParam) => {
                         dbConn.close();
                     })
                     .catch(function (err) {
-                        //console.log(err);
+                        console.log(err);
                         dbConn.close();
                     });
             })
@@ -131,14 +131,14 @@ getEmployeeDetailsById = (objParam) => {
 
 
 exports.updateEmployee = (req, res, next) => {
-   // console.log('inside update employee');
+    // console.log('inside update employee');
     let params = Object.assign(req.params, req.body);
     updateEmployee(params).then(result => {
         res.status(_STATUSCODE).json(result)
     })
 };
 
-function updateEmployee( objParam ) {
+function updateEmployee(objParam) {
     // console.log('--------------------------------')
     // console.log(objParam)
     // console.log('--------------------------------')
@@ -165,7 +165,7 @@ function updateEmployee( objParam ) {
                     .input("isDisabled", sql.Bit, objParam.chkDisable)
                     .input("comments", sql.NVarChar, (objParam.txtNewComment))
                     .input("email", sql.NVarChar, (objParam.txtEmail))
-                    
+
                     .execute("USP_BSVHR_UPDATE_EMPLOYEE_DETAILS_BY_ID")
                     .then(function (resp) {
                         //console.log(resp.recordset)
@@ -222,7 +222,7 @@ getMasterData = (objParam) => {
 /************* ADD MODULE *************/
 
 exports.addNewEmployee = (req, res, next) => {
-    let params = Object.assign({id:null}, req.body);
+    let params = Object.assign({ id: null }, req.body);
     // console.log('*****************************')
     // console.log(params)
     // console.log('*****************************')
@@ -241,7 +241,7 @@ exports.getAssingedHospitalPage = (req, res, next) => {
 };
 
 exports.getAssingedHospitaList = (req, res, next) => {
-     // console.log(req.params)
+    // console.log(req.params)
     getAssingedHospitaList(req.params).then((result) => {
         res.status(_STATUSCODE).json(result);
     });
@@ -249,7 +249,7 @@ exports.getAssingedHospitaList = (req, res, next) => {
 
 
 getAssingedHospitaList = (objParam) => {
-     //console.log(objParam.empId)
+    //console.log(objParam.empId)
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -282,36 +282,36 @@ exports.removeHospitalFromEmployeeList = (req, res, next) => {
     //console.log(req.params)
     //console.log('--------------------------')
     removeHospitalFromEmployeeList(req.params).then((result) => {
-      res.status(_STATUSCODE).json(result);
-  });
+        res.status(_STATUSCODE).json(result);
+    });
 };
 
 
 removeHospitalFromEmployeeList = (objParam) => {
-   // console.log(objParam)
-   return new Promise((resolve) => {
-       var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
-       dbConn
-           .connect()
-           .then(function () {
-               var request = new sql.Request(dbConn);
-               request
-                   .input("empId", sql.Int, objParam.empId)
-                   .input("hospitalId", sql.Int, objParam.hospitalId)
-                   .execute("USP_BSVHR_REMOVE_HOSPITAL_FROM_EMP_LIST")
-                   .then(function (resp) {
-                       resolve(resp.recordset);
-                       dbConn.close();
-                   })
-                   .catch(function (err) {
-                       //console.log(err);
-                       dbConn.close();
-                   });
-           })
-           .catch(function (err) {
-               //console.log(err);
-           });
-   });
+    // console.log(objParam)
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("empId", sql.Int, objParam.empId)
+                    .input("hospitalId", sql.Int, objParam.hospitalId)
+                    .execute("USP_BSVHR_REMOVE_HOSPITAL_FROM_EMP_LIST")
+                    .then(function (resp) {
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        //console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                //console.log(err);
+            });
+    });
 };
 
 
@@ -327,43 +327,43 @@ exports.getAssignNewHospitalToEmployeePage = (req, res, next) => {
 
 exports.getUnAssingedHospitals = (req, res, next) => {
     // console.log(req.params)
-   getUnAssingedHospitals(req.params).then((result) => {
-       res.status(_STATUSCODE).json(result);
-   });
+    getUnAssingedHospitals(req.params).then((result) => {
+        res.status(_STATUSCODE).json(result);
+    });
 };
 
 
 getUnAssingedHospitals = (objParam) => {
     //console.log(objParam.empId)
-   return new Promise((resolve) => {
-       var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
-       dbConn
-           .connect()
-           .then(function () {
-               var request = new sql.Request(dbConn);
-               request
-                   //.input("empId", sql.Int, objParam.empId)
-                   .execute("USP_BSVHR_GET_UN_ASSINGED_HOSPITALS")
-                   .then(function (resp) {
-                       resolve(resp.recordset);
-                       dbConn.close();
-                   })
-                   .catch(function (err) {
-                       //console.log(err);
-                       dbConn.close();
-                   });
-           })
-           .catch(function (err) {
-               //console.log(err);
-           });
-   });
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    //.input("empId", sql.Int, objParam.empId)
+                    .execute("USP_BSVHR_GET_UN_ASSINGED_HOSPITALS")
+                    .then(function (resp) {
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        //console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                //console.log(err);
+            });
+    });
 };
 
 exports.updateUnAssingedHosptalstoEmployee = (req, res, next) => {
     //console.log(req.body)
     updateUnAssingedHosptalstoEmployee(req.body).then((result) => {
-       res.status(_STATUSCODE).json(result);
-   });
+        res.status(_STATUSCODE).json(result);
+    });
 };
 
 updateUnAssingedHosptalstoEmployee = (objParam) => {
@@ -373,29 +373,29 @@ updateUnAssingedHosptalstoEmployee = (objParam) => {
         qry.push(`Exec USP_BSVHR_UPDATE_UN_ASSINGED_HOSPITALS_TO_EMPLOYEE ${rec.empId}, ${rec.hospitalId};`)
     });
     //console.log(qry.join(''))
-   return new Promise((resolve) => {
-       var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
-       dbConn
-           .connect()
-           .then(function () {
-               var request = new sql.Request(dbConn);
-               request
-                   //.input("empId", sql.Int, objParam.empId)
-                   //.execute("USP_BSVHR_GET_UN_ASSINGED_HOSPITALS")
-                   .query(qry.join(''))
-                   .then(function (resp) {
-                       resolve(resp.recordset);
-                       dbConn.close();
-                   })
-                   .catch(function (err) {
-                       //console.log(err);
-                       dbConn.close();
-                   });
-           })
-           .catch(function (err) {
-               //console.log(err);
-           });
-   });
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    //.input("empId", sql.Int, objParam.empId)
+                    //.execute("USP_BSVHR_GET_UN_ASSINGED_HOSPITALS")
+                    .query(qry.join(''))
+                    .then(function (resp) {
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        //console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                //console.log(err);
+            });
+    });
 };
 
 

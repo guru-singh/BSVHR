@@ -3,10 +3,10 @@ const router = express.Router();
 const controller = require('../controllers/employeeController')
 
 router.use((req, res, next) => {
-   // console.clear();
+  // console.clear();
   //  console.log('Time: ', Date.now())
-    next()
-  })
+  next()
+})
 
 // //   //listing
 
@@ -33,8 +33,8 @@ router.post('/employee-add/', controller.addNewEmployee);
 
 
 // // //ADD
-router.get('/employee-add/', controller.getEmployeeDetailsPage);
-router.post('/employee-add/', controller.addNewEmployee);
+// router.get('/employee-add/', controller.getEmployeeDetailsPage);
+// router.post('/employee-add/', controller.addNewEmployee);
 
 
 

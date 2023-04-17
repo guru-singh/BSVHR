@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Assign New Hospital</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="../../js/common.js"></script>
   <script src="../../js/axios.min.js"></script>
@@ -17,6 +18,7 @@
   <link rel="stylesheet" href="../../css/app.css" />
 
 </head>
+
 <body>
 
   <nav id="header"></nav>
@@ -24,7 +26,8 @@
   <form id="frm1" onsubmit="ValidateUnAssignedHospitals();return false;">
     <div class="container">
       <h1>Assign New Hospital</h1>
-      <div class="text-right m-b-10"><a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Back</a></div>
+      <div class="text-right m-b-10"><a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Back</a>
+      </div>
       <table id="un-assinged-hospital-list" class="table table-bordered">
         <thead>
           <tr>
@@ -36,13 +39,13 @@
           </tr>
         </thead>
         <tbody>
-          
+
         </tbody>
       </table>
       <div class="footer-btn">
         <button type="submit" class="btn btn-success btn-grad" id="isApprove">Approve</button>
       </div>
-      
+
     </div>
   </form>
 
@@ -63,7 +66,7 @@
   <script>
     $(function () {
       console.log("ready!");
-        $('#emp-hos-new').attr('href', `${_URL._EMPLOYEE_HOSPITAL_NEW}`);
+      $('#emp-hos-new').attr('href', `${_URL._EMPLOYEE_HOSPITAL_NEW}`);
 
       setupAssignNewHospitalToEmployeePage();
 
@@ -85,40 +88,41 @@
   </script>
   <script>
 
-  function isEnableApproveBtn() {
-    const isApproveBtn = $('#isApprove');
-    if ($('.selectedchk:checked').length > 0) {
-      isApproveBtn.removeAttr('disabled');
-    } else {
-      isApproveBtn.attr("disabled", true);
+    function isEnableApproveBtn() {
+      const isApproveBtn = $('#isApprove');
+      if ($('.selectedchk:checked').length > 0) {
+        isApproveBtn.removeAttr('disabled');
+      } else {
+        isApproveBtn.attr("disabled", true);
+      }
     }
-  }
 
     $('#ckbCheckAll').on('click', function () {
-        if (this.checked) {
-          $('.selectedchk').each(function () {
-            this.checked = true;
-          });
-        } else {
-          $('.selectedchk').each(function () {
-            this.checked = false;
-          });
-        }
-        isEnableApproveBtn();
-      });
+      if (this.checked) {
+        $('.selectedchk').each(function () {
+          this.checked = true;
+        });
+      } else {
+        $('.selectedchk').each(function () {
+          this.checked = false;
+        });
+      }
+      isEnableApproveBtn();
+    });
 
-      $('#assign-hosp-list').on('click', '.selectedchk', function () {
-    //alert('Ram');
-    console.log('checked');
-    if ($('.selectedchk:checked').length == $('.selectedchk').length) {
+    $('#assign-hosp-list').on('click', '.selectedchk', function () {
+      //alert('Ram');
+      console.log('checked');
+      if ($('.selectedchk:checked').length == $('.selectedchk').length) {
         $('#ckbCheckAll').prop('checked', true);
-    } else {
+      } else {
         $('#ckbCheckAll').prop('checked', false);
-    }
-    isEnableApproveBtn();
-});
+      }
+      isEnableApproveBtn();
+    });
 
   </script>
 
 </body>
+
 </html>

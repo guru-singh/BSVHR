@@ -3,12 +3,10 @@ function getHospitalList() {
     let param = {
         method: 'getHospitalList'
     };
- 
+
     axios
         .get("/hospitals/list", param).then((response) => {
-
             populateDataTable(response.data);
-
         }).catch((err) => {
             console.log(err);
         });
@@ -41,8 +39,8 @@ function populateDataTable(data) {
 
 
 function getHospitaDetails() {
-    if (!isEditPage() ) {
-        return ;
+    if (!isEditPage()) {
+        return;
     }
     let urlArr = window.location.href.split('/'),
         hospitalId = urlArr[urlArr.length - 1];
@@ -55,14 +53,12 @@ function getHospitaDetails() {
     };
 
     axios
-        .get('/hospitals-details/'+hospitalId).then((response) => {
-           console.log(response.data)
-           let hospitalData = response.data[0];
-           console.log(hospitalData.hospitalName);
-           $('#txtHospitalName').val(hospitalData.hospitalName);
-           $('#txtRegionName').val(hospitalData.regionName);
-           $("#chkIsDisable").prop("checked", hospitalData.isDisabled);
-
+        .get('/hospitals-details/' + hospitalId).then((response) => {
+            let hospitalData = response.data[0];
+            console.log(hospitalData);
+            $('#txtHospitalName').val(hospitalData.hospitalname);
+            $('#txtRegionName').val(hospitalData.regionName);
+            $("#chkIsDisable").prop("checked", hospitalData.isDisabled);
 
         }).catch((err) => {
             console.log(err);
@@ -104,33 +100,33 @@ function getQueryStringValue(key) {
 function validateMe() {
     //debugger;
     let urlArr = window.location.href.split('/'),
-    hospitalId = urlArr[urlArr.length - 1];
+        hospitalId = urlArr[urlArr.length - 1];
     // console.log($('#chkIsDisable').is(":checked"));
     //console.log(hospitalId);
 
     let param = {
-        hospitalName : $('#txtHospitalName').val(),
-        hospitalregion : $('#txtRegionName').val(),
-        isDisabled : $('#chkIsDisable').is(":checked") ? 'Checked' : ''
+        hospitalName: $('#txtHospitalName').val(),
+        hospitalregion: $('#txtRegionName').val(),
+        isDisabled: $('#chkIsDisable').is(":checked") ? 'Checked' : ''
     }
-    
-    URL =  isEditPage()? _URL._HOSPITAL_UPDATE+hospitalId: _URL._HOSPITAL_ADD
-    
-    axios
-    .post(URL, param).then((response) => {
-        console.log(response.data[0])
-        let res = response.data[0];
-        if (res.sucess === 'true') {
-             redirect(_URL._hospitalListing);
-        } else {
-            $('#lblMsg').text(res.msg);
-        }
-       
 
-    }).catch((err) => {
-        console.log(err);
-    });
-    
+    URL = isEditPage() ? _URL._HOSPITAL_UPDATE + hospitalId : _URL._HOSPITAL_ADD
+
+    axios
+        .post(URL, param).then((response) => {
+            console.log(response.data[0])
+            let res = response.data[0];
+            if (res.sucess === 'true') {
+                redirect(_URL._hospitalListing);
+            } else {
+                $('#lblMsg').text(res.msg);
+            }
+
+
+        }).catch((err) => {
+            console.log(err);
+        });
+
 
 
 }

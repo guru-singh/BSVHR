@@ -103,12 +103,11 @@ function getEmployeeDetails() {
 
     axios
         .get(`${_URL._EMPLOYEE_DETAILS}${empId}`).then((response) => {
-            // console.log(response.data)
-            let empDetails = response.data[0][0];
+            console.log(response.data)
+            let empDetails = response.data[0];
             //   combzone
             //   cmbState
-            //   cmbDesignation
-            // console.log(empDetails)
+            //   cmbDesignation            
             $('#txtHqCode').val(empDetails.HoCode);
             $('#txtEmpNumber').val(empDetails.EmpNumber);
             $('#txtFirstName').val(empDetails.firstName);
@@ -125,19 +124,14 @@ function getEmployeeDetails() {
                 var regex = /<br\s*[\/]?>/gi;
                 $("#txtComment").val(str.replace(regex, "\n"));
             }
-            
 
             $('#cmbZone').val(empDetails.ZoneID);
             $('#txtStateId').val(empDetails.StateID);
             $('#txtDesignation').val(empDetails.DesignationID);
 
-            
-            setTimeout(
-                cmbValues
-                ,
-                500);
-            $("#chkDisable").prop("checked", empDetails.empDisabled);
 
+            setTimeout(cmbValues, 500);
+            $("#chkDisable").prop("checked", empDetails.empDisabled);
 
         }).catch((err) => {
             console.log(err);
@@ -453,7 +447,7 @@ function getMyTeam() {
                             })
                         })
                     }
-                   // console.log('*********')
+                    // console.log('*********')
                 }
                 else {
                     // do notihng, as we have already created it
@@ -464,16 +458,16 @@ function getMyTeam() {
 
 
 
-            
-          //  console.log(...chartData)
+
+            //  console.log(...chartData)
 
             const color = d3.scaleOrdinal(d3.schemePaired);
             Sunburst()
                 .data(...chartData)
                 .color(d => color(d.name))
-                 .minSliceAngle(.4)
+                .minSliceAngle(.4)
                 .excludeRoot(true)
-                 .maxLevels(10)
+                .maxLevels(10)
                 .showLabels(true)
                 .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
                 (document.getElementById('chart'));

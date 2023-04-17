@@ -1,7 +1,6 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +17,7 @@
     <link rel="stylesheet" href="../../css/app.css" />
 
 </head>
+
 <body>
 
     <nav id="header"></nav>
@@ -25,7 +25,7 @@
     <div class="container">
         <h1>Add Hospital</h1>
         <div id='lblMsg'></div>
-        <div class="text-right"><a href="/employees" class="btn btn-success">Back</a></div>
+        <div class="text-right"><a href="/hospitals" class="btn btn-success">Back</a></div>
 
         <form id="frm1" onsubmit="validateMe();return false;" class="form">
 
@@ -42,7 +42,7 @@
             <!-- Hospital name: <input type="text" id="txtHospitalName" placeholder="Hospital Name" /><br><br>
             region name: <input type="text" id="txtRegionName" placeholder="Hospital region Name" /><br><br> -->
 
-            <input type="checkbox" id="chkIsDisable" name="chkIsDisable" value=""> Check to mark it disable 
+            <input type="checkbox" id="chkIsDisable" name="chkIsDisable" value=""> Check to mark it disable
 
             <div class="footer-btn reset">
                 <!-- <button type="submit" class="btn btn-default btn-grad">Submit</button> -->
@@ -55,22 +55,21 @@
         </form>
     </div>
 
-<script src="../../js/jquery.min.js"></script>
-<script src="../../js/datatables.min.js"></script>
-<script src="../../js/common.js"></script>
-<script src="../../js/axios.min.js"></script>
-<script src="../../js/bootstrap.min.js"></script>
-<script src="../../js/admin.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/datatables.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/axios.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/admin.js"></script>
 
-<script src="../../js/hospitals.js"></script>
-<script>
-    $(function () {
-        // console.log( "ready!" );
-        getHospitaDetails();
-    });
-</script>
-    
+    <script src="../../js/hospitals.js"></script>
+    <script>
+        $(function () {
+            // console.log( "ready!" );
+            getHospitaDetails();
+        });
+    </script>
+
 </body>
+
 </html>
-
-

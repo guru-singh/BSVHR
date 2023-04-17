@@ -4,33 +4,37 @@ const _FAILURE_STATUS_CODE = 201
 
 
 const _URL = {
-        _hospitalListing: '/hospitals',
-        _POSTLOGINURL:  '/dashboard',
-        _HOSPITAL_UPDATE:'/hospitals-update/',
-        _HOSPITAL_ADD:'/hospitals-add/',
-        _EMPLOYEES_LIST: '/employees/list',
-        _EMPLOYEE_DELETE: '/employee-delete',
-        _EMPLOYEE_EDIT: '/employee-edit/',
-        _EMPLOYEE_DETAILS: '/employee-details/',
-        _EMPLOYEE_MASTER: '/employee-master',
-        _EMPLOYEE_UPDATE:'/employee-update/',
-        _EMPLOYEE_ADD:'/employee-add',
-        _EMPLOYEE:'/employees',
-        _EMPLOYEE_HERARCHY: '/employee-hierarchy/',
-        _EMPLOYEE_HERARCHY_EMP_AND_PARENT: '/employee-hierarchy-details/',
-        _EMPLOYEE_HERARCHY_MGR_LIST: '/employee-hierarchy-mgr-list/',
-        _EMPLOYEE_HERARCHY_EMP_MGR_UPDATE: '/employee-hierarchy-mgr-update/',
-        _EMPLOYEE_HOSPITAL: '/employee-hospital/',
-        _EMPLOYEE_HOSPITAL_LIST: '/employee-hospital-list/',
-        _EMPLOYEE_HOSPITAL_EDIT: '/employee-hospital-edit/',
-        _EMPLOYEE_HOSPITAL_NEW: '/employee-hospital-new/',
-        _EMPLOYEE_HOSPITAL_UN_ASSIGNED: '/employee-hospital-un-assigned',
-        _EMPLOYEE_HOSPITAL_UN_ASSIGNED_UPDATE: '/employee-hospital-un-assigned-update',
-        _EMPLOYEE_MY_TEAM: '/employee-my-team/',
-        _EMPLOYEE_MY_TEAM_LIST: '/employee-my-team-list/'
-        
+    _MAIN_URL: '/',
+    _hospitalListing: '/hospitals',
+    _POSTLOGINURL: '/dashboard',
+    _HOSPITAL_UPDATE: '/hospitals-update/',
+    _HOSPITAL_ADD: '/hospitals-add/',
+    _EMPLOYEES_LIST: '/employees/list',
+    _EMPLOYEE_DELETE: '/employee-delete',
+    _EMPLOYEE_EDIT: '/employee-edit/',
+    _EMPLOYEE_DETAILS: '/employee-details/',
+    _EMPLOYEE_MASTER: '/employee-master',
+    _EMPLOYEE_UPDATE: '/employee-update/',
+    _EMPLOYEE_ADD: '/employee-add',
+    _EMPLOYEE: '/employees',
+    _EMPLOYEE_HERARCHY: '/employee-hierarchy/',
+    _EMPLOYEE_HERARCHY_EMP_AND_PARENT: '/employee-hierarchy-details/',
+    _EMPLOYEE_HERARCHY_MGR_LIST: '/employee-hierarchy-mgr-list/',
+    _EMPLOYEE_HERARCHY_EMP_MGR_UPDATE: '/employee-hierarchy-mgr-update/',
+    _EMPLOYEE_HOSPITAL: '/employee-hospital/',
+    _EMPLOYEE_HOSPITAL_LIST: '/employee-hospital-list/',
+    _EMPLOYEE_HOSPITAL_EDIT: '/employee-hospital-edit/',
+    _EMPLOYEE_HOSPITAL_NEW: '/employee-hospital-new/',
+    _EMPLOYEE_HOSPITAL_UN_ASSIGNED: '/employee-hospital-un-assigned',
+    _EMPLOYEE_HOSPITAL_UN_ASSIGNED_UPDATE: '/employee-hospital-un-assigned-update',
+    _EMPLOYEE_MY_TEAM: '/employee-my-team/',
+    _EMPLOYEE_MY_TEAM_LIST: '/employee-my-team-list/'
+}
 
-    }
+function logout() {
+    window.localStorage.clear();
+    window.location = _URL._MAIN_URL;
+}
 
 
 function checkIfValidStatus(statusCode) {
@@ -54,7 +58,7 @@ function redirect(url) {
     document.location.href = url;
 }
 
-function isEditPage(){
+function isEditPage() {
     return (location.pathname.indexOf('add') < 0)
 
 }
@@ -65,28 +69,28 @@ function loadComboBox(data, dropdown, displayValue, displayText, optionTextAlong
 
     let selectHeader = '';
 
-    switch(dropdown) {
+    switch (dropdown) {
         case 'cmbHosp':
             selectHeader = 'Select Hospital';
-        break;
+            break;
         case 'cmbRegion':
             selectHeader = 'Select State';
-        break;
+            break;
         case 'cmbBrandList':
             selectHeader = 'Select Brand';
-        break;
+            break;
         case 'cmbKam':
             selectHeader = 'Select KAM';
-        break;
+            break;
         case 'cmbRBM':
             selectHeader = 'Select RBM';
-        break;
+            break;
         case 'cmbZBM':
             selectHeader = 'Select ZBM';
-        break;
+            break;
         case 'cmbZone':
             selectHeader = 'Select Zone';
-        break;
+            break;
 
         default:
             selectHeader = '----Select----';
@@ -114,15 +118,15 @@ function loadComboBox(data, dropdown, displayValue, displayText, optionTextAlong
 
 function formatText(str, type) {
     //console.log('text format -->' + type)
-    switch(type) {
+    switch (type) {
         case 'UPPER':
             return str.toUpperCase()
-        break;
+            break;
         default:
             return camelCaseText(str)
             break;
     }
-   
+
 }
 
 function camelCaseText(str) {
@@ -146,11 +150,14 @@ function goBack() {
 }
 
 function loadHeader() {
-    $('#header').load('./includes/header.html');
+
+
+    $('#header').load(`${window.origin}/includes/header.html`);
+    //$('#header').load('./includes/header.html');
 }
 
 // function loadFooter() {
-    
+
 // }
 
 setTimeout(() => {

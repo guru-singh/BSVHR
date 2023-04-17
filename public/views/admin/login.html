@@ -2,7 +2,7 @@
 
 <head>
   <title>Login new routes</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'"> -->
   <link rel="stylesheet" href="../../css/bootstrap.min.css" />
   <link rel="stylesheet" href="../../css/app.css" />
 </head>
@@ -37,7 +37,7 @@
                     </form> -->
 
               <div id="lblmsg"></div>
-              <form class="login-form" onsubmit="letMeLogin();return false;">
+              <form class="login-form" onclick="letMeLogin();return false;">
                 <div class="form-group">
                   <label for="txtUsername">Username</label>
                   <input type="text" name='txtUsername' id='txtUsername' placeholder="username"
@@ -46,7 +46,7 @@
 
                 <div class="form-group">
                   <label for="txtPassword">Username</label>
-                  <input type="password" name='txtPassword' id='txtPassword' placeholder="password" value='BSV@112233'
+                  <input type="password" name='txtPassword' id='txtPassword' placeholder="password" value='BSV@11223344'
                     class="form-control" />
                 </div>
                 <button type="button" class="btn btn-default btn-grad">Login</button>
@@ -58,8 +58,6 @@
       </div>
     </div>
   </div>
-
-
 
   <script src="../../js/common.js"></script>
   <script src="../../js/jquery.min.js"></script>

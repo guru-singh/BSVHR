@@ -95,7 +95,7 @@ deleteHospital = (objParam) => {
 
 
 exports.addNewHospital = (req, res, next) => {
-    let params = Object.assign({id:null}, req.body);
+    let params = Object.assign({ id: null }, req.body);
     updateHospitalDetails(params).then(result => {
         res.status(_STATUSCODE).json(result)
     })
@@ -109,7 +109,7 @@ exports.updateHospitals = (req, res, next) => {
     })
 };
 
-function updateHospitalDetails( objParam ) {
+function updateHospitalDetails(objParam) {
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
