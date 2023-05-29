@@ -165,7 +165,7 @@ function validateMe() {
         txtEmail: $('#txtEmail').val(),
         txtPassword: $('#txtPassword').val(),
         txtNewComment: $('#txtNewComment').val(),
-        chkDisable: $('#chkDisable').is(':checked'), //($('#chkDisable').val() === 'on'),
+        chkDisable: ($('#chkDisable').val() === 'on'),
         cmbState: $('#cmbState').val(),
     },
         URL = isEditPage() ? _URL._EMPLOYEE_UPDATE + empId : _URL._EMPLOYEE_ADD;
