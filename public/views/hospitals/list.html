@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <title>Hospital List</title>
 
@@ -20,10 +21,10 @@
 
     <div class="container">
         <h1>Hospital List</h1>
-        
+
         <div class="text-right m-b-10">
             <a href="/hospitals-add/" class="btn btn-success">Add</a>
-          </div>
+        </div>
 
         <table id="hospitalList" class="display">
             <thead>
@@ -38,42 +39,48 @@
             </thead>
         </table>
     </div>
-   
+
+    <div class="overlay none" id="loader">
+        <div class="overlay__inner">
+            <div class="overlay__content"><span class="spinner"></span></div>
+        </div>
+    </div>
 
 
-   <!--Data Table-->
-   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
+
+    <!--Data Table-->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" /> -->
 
-   
-   <script src="../../js/jquery.min.js"></script>
-   <script src="../../js/datatables.min.js"></script>
-   <script src="../../js/common.js"></script>
-   <script src="../../js/axios.min.js"></script>
-   <script src="../../js/bootstrap.min.js"></script>
-   <script src="../../js/admin.js"></script>
 
-<!--Data Table-->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/datatables.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/axios.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/admin.js"></script>
 
-<script src="../../js/hospitals.js"></script>
+    <!--Data Table-->
 
-<script>
-    $(function() {
-       // console.log( "ready!" );
-        getHospitalList();
+    <script src="../../js/hospitals.js"></script>
 
-        $('#hospitalList').DataTable({
+    <script>
+        $(function () {
+            // console.log( "ready!" );
+            getHospitalList();
+
+            $('#hospitalList').DataTable({
                 "iDisplayLength": 100,
                 // "paging": false,
-                pageLength:5,
+                pageLength: 5,
                 "language": {
                     emptyTable: 'Loading data', // 
                     loadingRecords: "Please wait .. ", // default Loading...
                     zeroRecords: "No matching records found"
                 }
             });
-    });
+        });
     </script>
 </body>
 

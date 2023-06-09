@@ -1,5 +1,7 @@
 function getEmployeeList() {
 
+    $('#loader').removeClass('none');
+
     let param = {
         method: 'getEmployeesList'
     };
@@ -8,9 +10,10 @@ function getEmployeeList() {
         .get(_URL._EMPLOYEES_LIST, param).then((response) => {
             console.log(response.data);
             populateDataTable(response.data);
-
+            $('#loader').addClass('none');
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
 }
 
@@ -58,15 +61,18 @@ function populateDataTable(data) {
 
 
 function DeleteEmployee(id, name) {
+    $('#loader').removeClass('none');
     let text = `Are you sure you want to delete "${name}"`; // "Are you sure you want to delete '+  +'!\nEither OK or Cancel.";
     if (confirm(text) == true) {
         axios
             .post(_URL._EMPLOYEE_DELETE + '/' + id).then((response) => {
                 //console.log(response.data)
                 alert(response.data.msg)
-
+                $('#loader').addClass('none');
+                window.location.reload();
             }).catch((err) => {
                 console.log(err);
+                $('#loader').addClass('none');
             });
     } else {
         text = "You canceled!";
@@ -96,6 +102,8 @@ function getEmployeeDetails() {
         $('#dvOldComments').hide();
         return;
     }
+
+    $('#loader').removeClass('none');
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 1];
 
@@ -132,9 +140,11 @@ function getEmployeeDetails() {
 
             setTimeout(cmbValues, 500);
             $("#chkDisable").prop("checked", empDetails.empDisabled);
+            $('#loader').addClass('none');
 
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
 }
 
@@ -146,6 +156,9 @@ function cmbValues() {
 
 
 function validateMe() {
+
+    $('#loader').removeClass('none');
+
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 1];
 
@@ -176,13 +189,17 @@ function validateMe() {
         .post(URL, param).then((response) => {
             console.log(response.data[0])
             let res = response.data[0];
-            if (res.sucess === 'true') {
-                redirect(_URL._EMPLOYEE);
-            } else {
-                $('#lblMsg').text(res.msg);
-            }
+            // if (res.sucess === 'true') {
+            //     redirect(_URL._EMPLOYEE);
+            // } else {
+            //     $('#lblMsg').text(res.msg);
+            // }
+
+            $('#loader').addClass('none');
+            redirect(_URL._EMPLOYEE);
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
 
 }
@@ -197,15 +214,18 @@ function setupEmployeeHospitalPage() {
 
 function getEmployeeHospitalList() {
     let empId = getIdFromURL();
-    console.log(empId)
+    console.log(empId);
+    $('#loader').removeClass('none');
     axios
         .get(`${_URL._EMPLOYEE_HOSPITAL_LIST}${empId}`).then((response) => {
             // console.log(response.data)
 
             populateEmployeeHospitalDataTable(response.data[0]);
+            $('#loader').addClass('none');
 
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
     //console.log(formatText('this is my idea', 'UPPER'))
 }
@@ -259,13 +279,15 @@ function setupAssignNewHospitalToEmployeePage() {
 }
 
 function getAllUnAssingedHospitals() {
+    $('#loader').removeClass('none');
     axios
         .get(`${_URL._EMPLOYEE_HOSPITAL_UN_ASSIGNED}`).then((response) => {
             // console.log(response.data)
             populateUnAssingedHospitalDataTable(response.data);
-
+            $('#loader').addClass('none');
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
     //console.log(formatText('this is my idea', 'UPPER'))
 }
@@ -291,7 +313,11 @@ function populateUnAssingedHospitalDataTable(data) {
 }
 
 function ValidateUnAssignedHospitals() {
+
     console.log('get all the selcted checkbox');
+
+    $('#loader').removeClass('none');
+
     var arr = [],
         empId = getIdFromURL();
     $('.selectedchk').each(function () {
@@ -305,14 +331,16 @@ function ValidateUnAssignedHospitals() {
     console.log(arr);
     let param = {};
     param.param = arr;
+
     axios
         .post(`${_URL._EMPLOYEE_HOSPITAL_UN_ASSIGNED_UPDATE}`, param).then((response) => {
             //  console.log(response.data)
             // populateUnAssingedHospitalDataTable(response.data);
-            redirect(`${_URL._EMPLOYEE_HOSPITAL}${empId}`)
-
+            $('#loader').addClass('none');
+            redirect(`${_URL._EMPLOYEE_HOSPITAL}${empId}`);
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
 
 }

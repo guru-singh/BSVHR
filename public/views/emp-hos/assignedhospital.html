@@ -39,7 +39,13 @@
         </tr>
       </thead>
     </table>
-    
+
+  </div>
+
+  <div class="overlay none" id="loader">
+    <div class="overlay__inner">
+      <div class="overlay__content"><span class="spinner"></span></div>
+    </div>
   </div>
 
   <!--Data Table-->
@@ -59,7 +65,7 @@
   <script>
     $(function () {
       console.log("ready!");
-        $('#emp-hos-new').attr('href', `${_URL._EMPLOYEE_HOSPITAL_NEW}${getIdFromURL()}`);
+      $('#emp-hos-new').attr('href', `${_URL._EMPLOYEE_HOSPITAL_NEW}${getIdFromURL()}`);
 
       setupEmployeeHospitalPage();
 
@@ -75,7 +81,7 @@
           emptyTable: 'No matching records found', // 
           zeroRecords: "No matching records found"
         },
-        
+
       });
     });
 

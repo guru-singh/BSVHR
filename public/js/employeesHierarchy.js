@@ -5,6 +5,7 @@ function setupPage() {
 }
 
 function getEmployeeDetails() {
+    $('#loader').removeClass('none');
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 1];
     axios
@@ -15,24 +16,32 @@ function getEmployeeDetails() {
             $('#dvName').html(empDetails.firstName)
             $('#dvDesi').html(empDetails.Designation)
             $('#dvManager').html(mgrDetails.firstName)
+            $('#loader').addClass('none');
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
 }
 
 function getEmployeeManagerList() {
+    $('#loader').removeClass('none');
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 1];
     axios
         .get(`${_URL._EMPLOYEE_HERARCHY_MGR_LIST}${empId}`).then((response) => {
             let mgrList = response.data;
             loadComboBox(mgrList, 'cmbParent', 'empId', 'Name', null, 'UPPER');
+            $('#loader').addClass('none');
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
 }
 
 function validateMe() {
+
+    $('#loader').removeClass('none');
+
     if ($('#cmbParent').val() === "") {
         alert('select Parent');
         return false;
@@ -52,7 +61,11 @@ function validateMe() {
                 $('#dvMsg').html(data.msg)
                 redirect(_URL._EMPLOYEE);
             }
+
+            $('#loader').addClass('none');
+
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
 }

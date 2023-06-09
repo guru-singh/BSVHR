@@ -1,5 +1,7 @@
 function getHospitalList() {
 
+    $('#loader').removeClass('none');
+
     let param = {
         method: 'getHospitalList'
     };
@@ -7,8 +9,10 @@ function getHospitalList() {
     axios
         .get("/hospitals/list", param).then((response) => {
             populateDataTable(response.data);
+            $('#loader').addClass('none');
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
 }
 
@@ -39,9 +43,11 @@ function populateDataTable(data) {
 
 
 function getHospitaDetails() {
+
     if (!isEditPage()) {
         return;
     }
+    $('#loader').removeClass('none');
     let urlArr = window.location.href.split('/'),
         hospitalId = urlArr[urlArr.length - 1];
 
@@ -59,14 +65,16 @@ function getHospitaDetails() {
             $('#txtHospitalName').val(hospitalData.hospitalname);
             $('#txtRegionName').val(hospitalData.regionName);
             $("#chkIsDisable").prop("checked", hospitalData.isDisabled);
-
+            $('#loader').addClass('none');
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
 }
 
 
 function DeleteHospital(id, name) {
+    $('#loader').removeClass('none');
     let text = `Are you sure you want to delete "${name}"`; // "Are you sure you want to delete '+  +'!\nEither OK or Cancel.";
     if (confirm(text) == true) {
         let param = {
@@ -77,10 +85,12 @@ function DeleteHospital(id, name) {
         axios
             .post("/hospitals/delete", param).then((response) => {
                 //console.log(response.data)
-                alert(response.data.msg)
-
+                alert(response.data.msg);
+                $('#loader').addClass('none');
+                window.location.reload();
             }).catch((err) => {
                 console.log(err);
+                $('#loader').addClass('none');
             });
     } else {
         text = "You canceled!";
@@ -98,6 +108,7 @@ function getQueryStringValue(key) {
 }
 
 function validateMe() {
+    $('#loader').removeClass('none');
     //debugger;
     let urlArr = window.location.href.split('/'),
         hospitalId = urlArr[urlArr.length - 1];
@@ -116,15 +127,18 @@ function validateMe() {
         .post(URL, param).then((response) => {
             console.log(response.data[0])
             let res = response.data[0];
-            if (res.sucess === 'true') {
-                redirect(_URL._hospitalListing);
-            } else {
-                $('#lblMsg').text(res.msg);
-            }
+            // if (res.sucess === 'true') {
+            //     redirect(_URL._hospitalListing);
+            // } else {
+            //     $('#lblMsg').text(res.msg);
+            // }
 
+            redirect(_URL._hospitalListing);
 
+            $('#loader').addClass('none');
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
 
 

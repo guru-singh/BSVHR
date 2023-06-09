@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Hierarchy</title>
   <meta charset="utf-8">
@@ -17,18 +18,24 @@
   <link rel="stylesheet" href="../../css/app.css" />
 
 </head>
-<body> 
+
+<body>
 
   <nav id="header"></nav>
 
   <div class="container">
     <h1>Hierarchy</h1>
-    <strong><div id="dvMsg"></div></strong>
+    <strong>
+      <div id="dvMsg"></div>
+    </strong>
     <div class="text-right"><a href="/employees" class="btn btn-success">Back</a></div>
     <form id="frm1" onsubmit="validateMe(); return false;">
-      <div class="inline-div"><b>Name : </b> &nbsp; <div id="dvName"></div></div>
-      <div class="inline-div"><b>Designation:</b> &nbsp; <div id="dvDesi"></div></div>
-      <div class="inline-div"><b>Manager Name:</b> &nbsp; <div id="dvManager"></div></div>
+      <div class="inline-div"><b>Name : </b> &nbsp; <div id="dvName"></div>
+      </div>
+      <div class="inline-div"><b>Designation:</b> &nbsp; <div id="dvDesi"></div>
+      </div>
+      <div class="inline-div"><b>Manager Name:</b> &nbsp; <div id="dvManager"></div>
+      </div>
       <hr />
       <div class="form-group">
         <label for="combparent">Select Parent</label>
@@ -41,6 +48,12 @@
     </form>
   </div>
 
+  <div class="overlay none" id="loader">
+    <div class="overlay__inner">
+      <div class="overlay__content"><span class="spinner"></span></div>
+    </div>
+  </div>
+
   <script src="../../js/jquery.min.js"></script>
   <script src="../../js/datatables.min.js"></script>
   <script src="../../js/common.js"></script>
@@ -49,7 +62,7 @@
   <script src="../../js/admin.js"></script>
 
   <script src="../../js/employeesHierarchy.js"></script>
-  
+
   <script>
     $(function () {
       // console.log( "ready!" );
@@ -57,4 +70,5 @@
     });
   </script>
 </body>
+
 </html>

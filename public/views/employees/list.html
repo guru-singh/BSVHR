@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Employee List</title>
   <meta charset="utf-8">
@@ -19,7 +20,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
 </head>
-<body> 
+
+<body>
 
   <nav id="header"></nav>
 
@@ -52,41 +54,48 @@
         <tbody></tbody>
       </table>
     </div>
-    
+
 
   </div>
-   <!--Data Table-->
+  <!--Data Table-->
 
-   <script src="../../js/jquery.min.js"></script>
-   <script src="../../js/datatables.min.js"></script>
-   <script src="../../js/common.js"></script>
-   <script src="../../js/axios.min.js"></script>
-   <script src="../../js/bootstrap.min.js"></script>
-   <script src="../../js/admin.js"></script>
+  <div class="overlay none" id="loader">
+    <div class="overlay__inner">
+      <div class="overlay__content"><span class="spinner"></span></div>
+    </div>
+  </div>
 
-   <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script> -->
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/datatables.min.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="../../js/axios.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/admin.js"></script>
 
-<!--Data Table-->
+  <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script> -->
+
+  <!--Data Table-->
   <script src="../../js/employees.js"></script>
 
   <script>
-      $(function() {
-         // console.log( "ready!" );
-         $('#addNewEmp').attr('href', `${_URL._EMPLOYEE_ADD}`);
-         
-          getEmployeeList();
-  
-          $('#employeesList').DataTable({
-            "iDisplayLength": 100,
-              pageLength:5,
-                "language": {
-                    emptyTable: 'Loading data', // 
-                    loadingRecords: "Please wait .. ", // default Loading...
-                    zeroRecords: "No matching records found"
-                }
-              });
+    $(function () {
+      // console.log( "ready!" );
+      $('#addNewEmp').attr('href', `${_URL._EMPLOYEE_ADD}`);
+
+      getEmployeeList();
+
+      $('#employeesList').DataTable({
+        "iDisplayLength": 100,
+        pageLength: 5,
+        "language": {
+          emptyTable: 'Loading data', // 
+          loadingRecords: "Please wait .. ", // default Loading...
+          zeroRecords: "No matching records found"
+        }
       });
-      
-      </script>
+    });
+
+  </script>
 </body>
+
 </html>

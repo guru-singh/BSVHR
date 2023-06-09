@@ -1,4 +1,7 @@
 function letMeLogin() {
+
+    $('#loader').removeClass('none');
+
     let param = {
         method: 'adminLogin',
         username: $('#txtUsername').val(),
@@ -23,8 +26,10 @@ function letMeLogin() {
                 default:
                     break;
             }
+            $('#loader').addClass('none');
         }).catch((err) => {
             console.log(err);
+            $('#loader').addClass('none');
         });
 }
 
